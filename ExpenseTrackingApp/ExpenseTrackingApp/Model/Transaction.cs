@@ -32,14 +32,16 @@ namespace ExpenseTrackingApp.Model
     {
         public string Name { get; set; }
         public MonthBudget Month { get; }
+        public TransactionType Type { get; }
         public DateTime Date { get; }
         public decimal Amount { get; }
-        public Transaction(decimal amount, DateTime date, MonthBudget month, string name)
+        public Transaction(decimal amount, DateTime date, MonthBudget month, TransactionType type, string name)
         {
             this.Amount = amount;
             this.Date = date;
             this.Name = name;
             this.Month = month;
+            this.Type = type;
         }
 
     }
