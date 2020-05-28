@@ -6,11 +6,35 @@
              mc:Ignorable="d"
              x:Class="ExpenseTrackingApp.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
+    <StackLayout Margin="10,35,10,10">
+
+            <!-- Place new controls here -->
+            <Label Text="Expense Tracking App"
            HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+           VerticalOptions="CenterAndExpand"
+               FontAttributes="Bold"
+               FontSize="Micro"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Add" Clicked="OnAddButtonClicked" Grid.Row="1" BackgroundColor="DarkGray" />
+            <Button Text="Deduct" Clicked="OnDeductButtonClicked"  Grid.Row="1" Grid.Column="1" BackgroundColor="DarkGray"/>
+            <!--<ImageButton x:Name="Home" Source="icons8-home-64.png"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>-->
+            <Button Text="Balance" Clicked="OnBalanceButtonClicked" Grid.Row="3" BackgroundColor="LightCoral"/>
+            <Button Text="Transaction" Clicked="OnTransactionButtonClicked"  Grid.Row="3" Grid.Column="1" BackgroundColor="LightCoral"/>
+            <Button Text="Budget" Clicked="OnBudgetButtonClicked" Grid.Row="3" Grid.Column="2" BackgroundColor="LightCoral"/>
+            <Button Text="My Account" Clicked="OnMyAccountButtonClicked"  Grid.Row="3" Grid.Column="3" BackgroundColor="LightCoral"/>
+        </Grid>
     </StackLayout>
 
 </ContentPage>
