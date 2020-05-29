@@ -17,5 +17,24 @@ namespace ExpenseTrackingApp
         {
             InitializeComponent();
         }
+
+        private void OnAddButtonClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnTransactionButtonClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnBudgetButtonClicked(object sender, EventArgs e)
+        {
+
+        }
+        private void OnRemoveButtonClicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
