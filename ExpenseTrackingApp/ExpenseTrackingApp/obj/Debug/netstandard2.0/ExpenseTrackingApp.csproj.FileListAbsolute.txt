@@ -1,0 +1,14 @@
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\bin\Debug\netstandard2.0\ExpenseTrackingApp.deps.json
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\bin\Debug\netstandard2.0\ExpenseTrackingApp.dll
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\bin\Debug\netstandard2.0\ref\ExpenseTrackingApp.dll
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\bin\Debug\netstandard2.0\ExpenseTrackingApp.pdb
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\ExpenseTrackingApp.csprojAssemblyReference.cache
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\ExpenseTrackingApp.csproj.CoreCompileInputs.cache
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\ExpenseTrackingApp.AssemblyInfoInputs.cache
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\ExpenseTrackingApp.AssemblyInfo.cs
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\ExpenseTrackingApp.dll
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\ref\ExpenseTrackingApp.dll
+C:\Users\Soo Kim\source\repos\ExpenseTrackingApp\ExpenseTrackingApp\ExpenseTrackingApp\obj\Debug\netstandard2.0\ExpenseTrackingApp.pdb

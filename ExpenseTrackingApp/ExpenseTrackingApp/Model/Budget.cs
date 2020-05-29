@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ExpenseTrackingApp.Model
@@ -20,39 +21,53 @@ namespace ExpenseTrackingApp.Model
                 return balance;
             } 
         }
+        public decimal BudgetLimit { get; set; }
+
         private List<Transaction> allTransactions = new List<Transaction>();
-        public Budget()
+        public Budget(decimal budgetLimit)
         {
-            //Ana, I need help~
+            BudgetLimit = budgetLimit;
+            if (BudgetLimit >= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(budgetLimit), "Enter a larger budget");
+            }
         }
 
-        public void Spend(decimal amount, DateTime date, MonthBudget month, string name)
+        public void Spend(decimal amount, DateTime date, MonthBudget month, TransactionType type, string name)
         {
             if (amount <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(amount), "Enter a positive number");
             }
-            var spent = new Transaction(amount, date, month, name);
+            var spent = new Transaction(amount, date, month, type, name);
             allTransactions.Add(spent);
+
         }
-        public void Save(decimal amount, DateTime date, MonthBudget month, string name)
+        public void Save(decimal amount, DateTime date, MonthBudget month, TransactionType type, string name)
         {
             if (amount <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(amount), "Enter a positive number");
             }
 
-            var save = new Transaction(-amount, date, month, name);
+            var save = new Transaction(-amount, date, month, type, name);
             allTransactions.Add(save);
 
             //alert for exceeding budget
-            if (Balance - amount < 0)
-            {
-                throw new InvalidOperationException("Budget Exceeded");
-            }
+
 
         }
-        //public string GetTransaction History()
+        //public string ShowAllTransaction()
+        //{
+        //    var report = new System.Text.StringBuilder();
+        //    decimal balance = 0;
+        //}
+        //public string ShowTransactionByType()
+        //{
+        //    var report = new System.Text.StringBuilder();
+        //    decimal balance = 0;
+        //}
+        //public string ShowTransactionByMonth()
         //{
         //    var report = new System.Text.StringBuilder();
         //    decimal balance = 0;
