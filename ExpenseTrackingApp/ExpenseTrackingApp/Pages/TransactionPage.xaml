@@ -11,6 +11,7 @@
             <Label Text="Transaction"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button Text="Add Transaction" Clicked="AddTransactionButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -8,11 +8,11 @@ namespace ExpenseTrackingApp.Model
 
     public class Budget
     {
-        public decimal TotalBudget { get; set; }
-        public decimal Balance { 
+        public double TotalBudget { get; set; }
+        public double Balance { 
             get 
             {
-                decimal balance = 0;
+                double balance = 0;
                 foreach (var transaction in allTransactions)
                 {
                     balance += transaction.Amount;
@@ -33,7 +33,7 @@ namespace ExpenseTrackingApp.Model
             }
         }
 
-        public void Spend(decimal amount, DateTime date, MonthBudget month, TransactionType type, string name)
+        public void Spend(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
         {
             if (amount <= 0)
             {
@@ -43,7 +43,7 @@ namespace ExpenseTrackingApp.Model
             allTransactions.Add(spent);
 
         }
-        public void Save(decimal amount, DateTime date, MonthBudget month, TransactionType type, string name)
+        public void Save(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
         {
             if (amount <= 0)
             {
