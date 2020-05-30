@@ -34,8 +34,8 @@ namespace ExpenseTrackingApp.Model
         public MonthBudget Month { get; }
         public TransactionType Type { get; }
         public DateTime Date { get; }
-        public decimal Amount { get; }
-        public Transaction(decimal amount, DateTime date, MonthBudget month, TransactionType type, string name)
+        public double Amount { get; }
+        public Transaction(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
         {
             this.Amount = amount;
             this.Date = date;

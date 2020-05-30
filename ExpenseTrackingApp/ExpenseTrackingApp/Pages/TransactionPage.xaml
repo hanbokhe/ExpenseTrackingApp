@@ -8,6 +8,18 @@
              Title="Transactions">
     <ContentPage.Content>
         <StackLayout>
+            <Button Text="Add Transaction" Clicked="AddTransactionButton_Clicked"/>
+            <ListView x:Name="transactionListView"
+                  Margin="20"
+                  ItemSelected="OnListViewItemSelected">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Month}"
+                              Detail="{Binding Type}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Label Text="Transaction"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
