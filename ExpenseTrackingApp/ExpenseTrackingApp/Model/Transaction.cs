@@ -9,7 +9,7 @@ namespace ExpenseTrackingApp.Model
         Car,
         Entertainment,
         Food,
-        Gas,
+        Misc,
         Shopping,
         Rent,
     }
@@ -38,12 +38,15 @@ namespace ExpenseTrackingApp.Model
         public Transaction(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
         {
             this.Amount = amount;
-            this.Date = date;
+            this.Date = DateTime.Now;
             this.Name = name;
             this.Month = month;
             this.Type = type;
         }
 
+        public Transaction()
+        {
+        }
     }
 
 }

@@ -8,37 +8,10 @@
              Title="Transactions">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Transactions"
+            <Label Text="Transaction"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="Start" />
-            <Label Text="$4,000 | $3,000" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Title"/>
-            <Label Text="Total:    SPEND      REMAINING" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body"/>
+                HorizontalOptions="CenterAndExpand" />
             <Button Text="Add Transaction" Clicked="AddTransactionButton_Clicked"/>
-            <Label Text="Rent" FontSize="Small" HorizontalOptions="Start"/>
-            <Image  x:Name="RentImage" HeightRequest="30" WidthRequest="30" Margin="10,10,0,10" />
-            
-             <ListView x:Name="RentTransactionsListView"
-                  Margin="2">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ImageCell Text="hello" ImageSource="Assets/Images/rent.png"/>
-                       
-                       
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Label Text="Entertainment" FontSize="Small" HorizontalOptions="Start"/>
-            <ListView x:Name="EntertainmentTransactionListView"
-                  Margin="2"
-                  ItemSelected="OnListViewItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}"
-                              Detail="{Binding Amount}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
