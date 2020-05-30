@@ -44,13 +44,9 @@ namespace ExpenseTrackingApp.Pages
 
             //RentImage.Source = ImageSource.FromFile("ms-appx:///Images/rent.png");
      
-            RentTransactionsListView.ItemsSource = transactions.Where(t => t.Type == TransactionType.Rent).ToList();
+            //RentTransactionsListView.ItemsSource = transactions.Where(t => t.Type == TransactionType.Rent).ToList();
 
-            EntertainmentTransactionListView.ItemsSource = transactions.Where(t => t.Type == TransactionType.Entertainment).ToList();
-        }
-            private void AddTransactionButton_Clicked(object sender, EventArgs e)
-        {
-
+            //EntertainmentTransactionListView.ItemsSource = transactions.Where(t => t.Type == TransactionType.Entertainment).ToList();
         }
 
         private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)

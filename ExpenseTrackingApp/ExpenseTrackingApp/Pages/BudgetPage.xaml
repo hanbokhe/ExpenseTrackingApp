@@ -19,10 +19,7 @@
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="model:BudgetItem">
                 <ViewCell>
-
-                    <!-- Two-column grid -->
                     <Grid>
-
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50" />
                         </Grid.RowDefinitions>
@@ -30,27 +27,11 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-
-                        <!-- Left column - BindingContext set to ModelPair.Item1  -->
                         <Label Grid.Column="0" Text="{Binding BudgetItemCategory}" FontSize="Large" HorizontalTextAlignment="Center"/>
-
-                        <!-- Right column - BindingContext set to ModelPair.Item2 -->
                         <Label Text="{Binding TotalAmount}" Grid.Column="1" FontSize="Large" HorizontalTextAlignment="Center"/>
                     </Grid>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </view:AlternatingListView>
-    
-    <!--<Grid Margin="8">
-        <Button x:Name="btnEarth" Grid.Row="0" Grid.Column="0" Text="🌎" />
-        <Button x:Name="btnMoon"  Grid.Row="0" Grid.Column="1" Text="🌕" />
-        <Button x:Name="btnSun"   Grid.Row="1" Grid.Column="0" Text="☀️" />
-        <Button x:Name="btnComet" Grid.Row="1" Grid.Column="1" Text="☄" />
-
-        <Label Grid.Row="0" Grid.Column="0" Text="Earth" />
-        <Label Grid.Row="0" Grid.Column="1" Text="Moon" />
-        <Label Grid.Row="1" Grid.Column="0" Text="Sun" />
-        <Label Grid.Row="1" Grid.Column="1" Text="Comet" />
-    </Grid>-->
 </ContentPage>
