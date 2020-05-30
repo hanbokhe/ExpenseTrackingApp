@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace ExpenseTrackingApp.Model
@@ -31,10 +32,11 @@ namespace ExpenseTrackingApp.Model
     class Transaction
     {
         public string Name { get; set; }
-        public MonthBudget Month { get; }
-        public TransactionType Type { get; }
-        public DateTime Date { get; }
-        public double Amount { get; }
+        public MonthBudget Month { get; set; }
+        public TransactionType Type { get; set; }
+        public DateTime Date { get; set; }
+        public double Amount { get; set; }
+        public string FileName { get; set; }
         public Transaction(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
         {
             this.Amount = amount;
@@ -42,6 +44,7 @@ namespace ExpenseTrackingApp.Model
             this.Name = name;
             this.Month = month;
             this.Type = type;
+            FileName = null;
         }
 
         public Transaction()

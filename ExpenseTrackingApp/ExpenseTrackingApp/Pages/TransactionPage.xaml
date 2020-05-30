@@ -8,10 +8,78 @@
              Title="Transactions">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Transaction"
+            <Label Text="Transactions"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="Start" />
+            <Label Text="$4,000 | $3,000" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Title"/>
+            <Label Text="Total:    SPEND      REMAINING" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body"/>
             <Button Text="Add Transaction" Clicked="AddTransactionButton_Clicked"/>
+            <Label Text="Car" FontSize="Small" HorizontalOptions="Start"/>
+            <ListView x:Name="CarTransactionListView"
+                  Margin="0,0,0,0"
+                  ItemSelected="OnListViewItemSelected">
+                <ListView.ItemTemplate >
+                    <DataTemplate >
+                        <TextCell  Text="{Binding Name}"
+                              Detail="{Binding Amount}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Margin="0,0,0,0" Text="Entertainment" FontSize="Small" HorizontalOptions="Start"/>
+            <ListView x:Name="EntertainmentTransactionListView"
+                  Margin="0,0,0,0"
+                  ItemSelected="OnListViewItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}"
+                              Detail="{Binding Amount}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Margin="0,0,0,0" Text="Food" FontSize="Small" HorizontalOptions="Start"/>
+            <ListView x:Name="FoodTransactionListView"
+                  Margin="0,0,0,0"
+                  ItemSelected="OnListViewItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}"
+                              Detail="{Binding Amount}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Margin="0,0,0,0" Text="Misc" FontSize="Small" HorizontalOptions="Start"/>
+            <ListView x:Name="MiscTransactionListView"
+                  Margin="0,0,0,0"
+                  ItemSelected="OnListViewItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}"
+                              Detail="{Binding Amount}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Margin="0,0,0,0" Text="Shopping" FontSize="Small" HorizontalOptions="Start"/>
+            <ListView x:Name="ShoppingTransactionListView"
+                  Margin="0,0,0,0"
+                  ItemSelected="OnListViewItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}"
+                              Detail="{Binding Amount}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Margin="0,0,0,0" Text="Rent" FontSize="Small" HorizontalOptions="Start"/>
+            <ListView x:Name="RentTransactionListView"
+                  Margin="0,0,0,0"
+                  ItemSelected="OnListViewItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}"
+                              Detail="{Binding Amount}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

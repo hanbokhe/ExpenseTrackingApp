@@ -43,7 +43,7 @@
                     <x:String>December</x:String>
                 </Picker.Items>
             </Picker>
-
+            <Button Text="Save" Clicked="OnSaveButton_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
