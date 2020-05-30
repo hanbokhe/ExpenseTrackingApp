@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpenseTrackingApp.Pages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,33 +9,19 @@ using Xamarin.Forms;
 
 namespace ExpenseTrackingApp
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
-    [DesignTimeVisible(false)]
-    public partial class MainPage : ContentPage
+    public partial class MainPage : TabbedPage
     {
         public MainPage()
         {
+            this.Title = "TabbedPage";
+            this.BarBackgroundColor = Color.Red;
+            this.BarTextColor = Color.Black;
+
             InitializeComponent();
-        }
-
-        private void OnAddButtonClicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnTransactionButtonClicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnBudgetButtonClicked(object sender, EventArgs e)
-        {
-
-        }
-        private void OnRemoveButtonClicked(object sender, EventArgs e)
-        {
-
+            Children.Add(new AccountPage());
+            Children.Add(new BudgetPage());
+            Children.Add(new TransactionPage());
+            Children.Add(new TrendsPage());
         }
     }
 }

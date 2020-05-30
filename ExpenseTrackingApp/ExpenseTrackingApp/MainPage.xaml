@@ -1,40 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="ExpenseTrackingApp.MainPage">
+             xmlns:local="clr-namespace:Astronomy"
+             x:Class="ExpenseTrackingApp.MainPage"
+             Title="Expense Tracker"
+             BackgroundImage="starfield.png">
 
-    <StackLayout Margin="10,10,10,10">
-        <!-- Place new controls here -->
-        <Label Text="Expense Tracking App"
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand"
-               FontAttributes="Bold"
-               FontSize="Medium"/>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="300"/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Text="Add" Clicked="OnAddButtonClicked" Grid.Row="1" BackgroundColor="DarkGray" />
-            <Button Text="Remove" Clicked="OnRemoveButtonClicked"  Grid.Row="1" Grid.Column="1" BackgroundColor="DarkGray"/>
-            <!--<ImageButton x:Name="Home" Source="icons8-home-64.png"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>-->
-            <Button Text="Transaction" Clicked="OnTransactionButtonClicked"  Grid.Row="3" Grid.Column="1" BackgroundColor="LightCoral"/>
-            <Button Text="Budget" Clicked="OnBudgetButtonClicked" Grid.Row="3"  BackgroundColor="LightCoral"/>
-            <!--<Button Text="My Account" Clicked="OnMyAccountButtonClicked"  Grid.Row="3" Grid.Column="3" BackgroundColor="LightCoral"/>-->
-
-
-        </Grid>
-    </StackLayout>
-
-
-</ContentPage>
-    
+</TabbedPage> 
