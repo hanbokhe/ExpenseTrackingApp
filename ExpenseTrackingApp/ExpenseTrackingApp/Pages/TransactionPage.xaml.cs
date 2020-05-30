@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpenseTrackingApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,11 @@ namespace ExpenseTrackingApp.Pages
         {
             InitializeComponent();
         }
+
+        private async void AddTransactionButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new AddTransaction { BindingContext = new Transaction()});
+        }
+    
     }
 }
