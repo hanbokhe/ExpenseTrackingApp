@@ -14,8 +14,6 @@ namespace ExpenseTrackingApp
         public MainPage()
         {
             this.Title = "TabbedPage";
-            this.BarBackgroundColor = Color.Red;
-            this.BarTextColor = Color.Black;
 
             InitializeComponent();
             Children.Add(new AccountPage());
