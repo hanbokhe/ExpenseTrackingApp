@@ -3,24 +3,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:ExpenseTrackingApp.Model"
+             xmlns:view="clr-namespace:ExpenseTrackingApp.View"
+             xmlns:local="clr-namespace:ExpenseTrackingApp.Pages"
              mc:Ignorable="d"
              x:Class="ExpenseTrackingApp.Pages.BudgetPage"
             Title="Budget">
+
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="BoxView">
-                <Setter Property="HorizontalOptions" Value="Center"/>
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Orientation="Horizontal">
-        <Label x:Name="Planned" FontAttributes="Bold"/>
-        <Label x:Name="Spent" FontAttributes="Bold"/>
-        <Label x:Name="Remaining" FontAttributes="Bold"/>
-        <Button x:Name="Add" FontAttributes="Bold"/>
-        <Grid>
-            
-        </Grid>
 
-    </StackLayout>
+    <view:AlternatingListView x:Name="BudgetItemsView" HasUnevenRows="True" ItemSelected="BudgetItemsView_ItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:BudgetItem">
+                <ViewCell>
+
+                    <!-- Two-column grid -->
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Left column - BindingContext set to ModelPair.Item1  -->
+                        <Label Grid.Column="0" Text="{Binding BudgetItemCategory}" FontSize="Large" HorizontalTextAlignment="Center"/>
+
+                        <!-- Right column - BindingContext set to ModelPair.Item2 -->
+                        <Label Text="{Binding TotalAmount}" Grid.Column="1" FontSize="Large" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </view:AlternatingListView>
+    
+    <!--<Grid Margin="8">
+        <Button x:Name="btnEarth" Grid.Row="0" Grid.Column="0" Text="🌎" />
+        <Button x:Name="btnMoon"  Grid.Row="0" Grid.Column="1" Text="🌕" />
+        <Button x:Name="btnSun"   Grid.Row="1" Grid.Column="0" Text="☀️" />
+        <Button x:Name="btnComet" Grid.Row="1" Grid.Column="1" Text="☄" />
+
+        <Label Grid.Row="0" Grid.Column="0" Text="Earth" />
+        <Label Grid.Row="0" Grid.Column="1" Text="Moon" />
+        <Label Grid.Row="1" Grid.Column="0" Text="Sun" />
+        <Label Grid.Row="1" Grid.Column="1" Text="Comet" />
+    </Grid>-->
 </ContentPage>
