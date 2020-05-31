@@ -1,13 +1,17 @@
 ﻿using ExpenseTrackingApp.Model;
+using Microcharts;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Entry=Microcharts.Entry;
 
 namespace ExpenseTrackingApp.Pages
 {
@@ -16,10 +20,13 @@ namespace ExpenseTrackingApp.Pages
     {
         public ObservableCollection<BudgetItem> BudgetItems { get; set; } = new ObservableCollection<BudgetItem>();
 
+        private List<Entry> entries = new List<Entry>();
+
         public BudgetPage()
         {
             InitializeComponent();
             this.InitializeBudgetItems();
+            this.InitializeBudgetChart();
         }
 
         private void InitializeBudgetItems()
@@ -34,9 +41,17 @@ namespace ExpenseTrackingApp.Pages
             this.BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Shopping, TotalAmount = 60 });
         }
 
-        private void BudgetItemsView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void InitializeBudgetChart()
         {
+            entries.Add(new Entry(200) { Color = SKColor.Parse(Color.Red.ToHex())});
+            entries.Add(new Entry(100) { Color = SKColor.Parse(Color.Green.ToHex())});
+            entries.Add(new Entry(100) { Color = SKColor.Parse(Color.Blue.ToHex())});
+            BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
+        }
 
+        private async void BudgetItemsView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            await Navigation.PushModalAsync(new ListTransactionPage());
         }
     }
 }

@@ -29,7 +29,7 @@ namespace ExpenseTrackingApp.Model
         November,
         December,
     }
-    class Transaction
+    public class Transaction
     {
         public string Name { get; set; }
         public MonthBudget Month { get; set; }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.Forms.Internals;
 
 namespace ExpenseTrackingApp.Model
 {
@@ -27,7 +29,7 @@ namespace ExpenseTrackingApp.Model
         public Budget(decimal budgetLimit)
         {
             BudgetLimit = budgetLimit;
-            if (BudgetLimit >= 0)
+            if (BudgetLimit <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(budgetLimit), "Enter a larger budget");
             }
@@ -57,6 +59,15 @@ namespace ExpenseTrackingApp.Model
 
 
         }
+
+        public List<Transaction> GetTransactions(ExpenseTrackingApp.Model.TransactionType transactionType)
+        {
+            var transactionList = new List<Transaction>();
+            var filteredTransactions = allTransactions.Where(transaction => transaction.Type == transactionType);
+            filteredTransactions.ForEach(transaction => transactionList.Add(transaction));
+            return transactionList;
+        }
+
         //public string ShowAllTransaction()
         //{
         //    var report = new System.Text.StringBuilder();
