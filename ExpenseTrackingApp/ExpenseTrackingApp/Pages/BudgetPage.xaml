@@ -4,34 +4,48 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:model="clr-namespace:ExpenseTrackingApp.Model"
-             xmlns:view="clr-namespace:ExpenseTrackingApp.View"
-             xmlns:local="clr-namespace:ExpenseTrackingApp.Pages"
+             xmlns:view="clr-namespace:ExpenseTrackingApp.View" xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              mc:Ignorable="d"
              x:Class="ExpenseTrackingApp.Pages.BudgetPage"
             Title="Budget">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="sans-serif" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <view:AlternatingListView x:Name="BudgetItemsView" HasUnevenRows="True" ItemSelected="BudgetItemsView_ItemSelected">
-        <ListView.ItemTemplate>
-            <DataTemplate x:DataType="model:BudgetItem">
-                <ViewCell>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="{Binding BudgetItemCategory}" FontSize="Large" HorizontalTextAlignment="Center"/>
-                        <Label Text="{Binding TotalAmount}" Grid.Column="1" FontSize="Large" HorizontalTextAlignment="Center"/>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </view:AlternatingListView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="50*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Text="Total Balance" HorizontalTextAlignment="Center"></Label>
+        <Label Grid.Row="2" Text="Remaining" HorizontalTextAlignment="Center"></Label>
+        <forms:ChartView x:Name="BudgetChart" Grid.Row="1" HeightRequest="150"></forms:ChartView>
+        <view:AlternatingListView x:Name="BudgetItemsView" HasUnevenRows="True" ItemSelected="BudgetItemsView_ItemSelected" Grid.Row="3">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:BudgetItem">
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding BudgetItemCategory}" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding TotalAmount}" Grid.Column="1" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </view:AlternatingListView>
+    </Grid>
 </ContentPage>
