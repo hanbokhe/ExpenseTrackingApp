@@ -43,10 +43,9 @@ namespace ExpenseTrackingApp.Pages
 
         private void InitializeBudgetChart()
         {
-            entries.Add(new Entry(200) { Label = "Total", Color = SKColor.Parse(Color.Red.ToHex()), ValueLabel= "200" });
-            entries.Add(new Entry(100) { Label = "Total", Color = SKColor.Parse(Color.Green.ToHex()), ValueLabel = "100" }); ;
-            entries.Add(new Entry(50) { Label = "Total", Color = SKColor.Parse(Color.Blue.ToHex()), ValueLabel= "50" });
-            entries.Add(new Entry(500) { Label = "Total", Color = SKColor.Parse(Color.Orange.ToHex()), ValueLabel= "500" });
+            entries.Add(new Entry(200) { Color = SKColor.Parse(Color.Red.ToHex())});
+            entries.Add(new Entry(100) { Color = SKColor.Parse(Color.Green.ToHex())});
+            entries.Add(new Entry(100) { Color = SKColor.Parse(Color.Blue.ToHex())});
             BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
         }
 

@@ -20,15 +20,48 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*" />
+            <RowDefinition Height="8*" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="10*" />
+            <RowDefinition Height="5*" />
             <RowDefinition Height="50*" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Text="Total Balance" HorizontalTextAlignment="Center"></Label>
-        <Label Grid.Row="2" Text="Remaining" HorizontalTextAlignment="Center"></Label>
-        <forms:ChartView x:Name="BudgetChart" Grid.Row="1" HeightRequest="150"></forms:ChartView>
-        <view:AlternatingListView x:Name="BudgetItemsView" HasUnevenRows="True" ItemSelected="BudgetItemsView_ItemSelected" Grid.Row="3">
+        <StackLayout Grid.Row="0" Orientation="Horizontal">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+                <Picker Grid.Column="0" x:Name="MonthPicker" HorizontalOptions="FillAndExpand">
+                    <Picker.Items>
+                        <x:String>January</x:String>
+                        <x:String>Feburary</x:String>
+                        <x:String>March</x:String>
+                        <x:String>April</x:String>
+                        <x:String>May</x:String>
+                        <x:String>June</x:String>
+                        <x:String>July</x:String>
+                        <x:String>August</x:String>
+                        <x:String>September</x:String>
+                        <x:String>October</x:String>
+                        <x:String>November</x:String>
+                        <x:String>December</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Button Grid.Column="1" Text="Edit" HorizontalOptions="End"/>
+            </Grid>
+        </StackLayout>
+        <forms:ChartView Grid.Row="1" x:Name="BudgetChart" HeightRequest="150"></forms:ChartView>
+        <StackLayout Grid.Row="2" Orientation="Horizontal">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Spent" HorizontalTextAlignment="Center"/>
+                <Label Grid.Column="1" Text="Remaining" HorizontalTextAlignment="Center"/>
+            </Grid>
+        </StackLayout>
+        <view:AlternatingListView Grid.Row="3" x:Name="BudgetItemsView" HasUnevenRows="True" ItemSelected="BudgetItemsView_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:BudgetItem">
                     <ViewCell>
