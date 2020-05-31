@@ -8,18 +8,22 @@ using System.Threading.Tasks;
 using ExpenseTrackingApp.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Collections;
 
 namespace ExpenseTrackingApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TransactionPage : ContentPage
     {
-        private List<Transaction> transactions;
+        private List<Transaction> Transactions;
+        private System.Collections.Hashtable TotalAmountByCategory;
+        private double totalSpend;
 
         public TransactionPage()
         {
             InitializeComponent();
-            transactions = new List<Transaction>();
+            Transactions = new List<Transaction>();
+            TotalAmountByCategory = new Hashtable();
         }
       
         protected override void OnAppearing()
@@ -34,7 +38,17 @@ namespace ExpenseTrackingApp.Pages
             TransactionType transactionType;
             string[] separator = new string[] { "\n"};
             string[] lines;
-            transactions.Clear();
+            totalSpend = 0;
+            Transactions.Clear();
+            TotalAmountByCategory.Clear();
+            //insert categories
+            TotalAmountByCategory.Add("Car", 0.00);
+            TotalAmountByCategory.Add("Entertainment", 0.00);
+            TotalAmountByCategory.Add("Food", 0.00);
+            TotalAmountByCategory.Add("Misc", 0.00);
+            TotalAmountByCategory.Add("Shopping", 0.00);
+            TotalAmountByCategory.Add("Rent", 0.00);
+
             foreach (var filename in files)
             {
                 allText = File.ReadAllText(filename);
@@ -45,7 +59,8 @@ namespace ExpenseTrackingApp.Pages
                 transactionMonth = getMonthValue(lines[3]);
                 transactionType = getTransactionType(lines[4]);
                 transactionDateTime = DateTime.Today; // we have to convert this property from file
-                transactions.Add(new Transaction
+                totalSpend += transactionAmount;
+                Transactions.Add(new Transaction
                 {
                     Amount = transactionAmount,
                     Date = transactionDateTime,
@@ -56,7 +71,7 @@ namespace ExpenseTrackingApp.Pages
 
                 });
 
-
+                TotalAmountByCategory[lines[4].Trim()] = (double) TotalAmountByCategory[lines[4].Trim()] + transactionAmount;
             }
 
             MonthBudget getMonthValue ( string value )
@@ -104,14 +119,21 @@ namespace ExpenseTrackingApp.Pages
                     return TransactionType.Rent;
 
             }
-            CarTransactionListView.ItemsSource= transactions.Where(t => t.Type == TransactionType.Car).ToList();
-            EntertainmentTransactionListView.ItemsSource = transactions.Where(t => t.Type == TransactionType.Entertainment).ToList();
-            FoodTransactionListView.ItemsSource= transactions.Where(t => t.Type == TransactionType.Food).ToList();
-            MiscTransactionListView.ItemsSource= transactions.Where(t => t.Type == TransactionType.Misc).ToList();
-            ShoppingTransactionListView.ItemsSource= transactions.Where(t => t.Type == TransactionType.Shopping).ToList();
-            RentTransactionListView.ItemsSource = transactions.Where(t => t.Type == TransactionType.Rent).ToList();
+            CarTransactionListView.ItemsSource= Transactions.Where(t => t.Type == TransactionType.Car).ToList();
+            EntertainmentTransactionListView.ItemsSource = Transactions.Where(t => t.Type == TransactionType.Entertainment).ToList();
+            FoodTransactionListView.ItemsSource= Transactions.Where(t => t.Type == TransactionType.Food).ToList();
+            MiscTransactionListView.ItemsSource= Transactions.Where(t => t.Type == TransactionType.Misc).ToList();
+            ShoppingTransactionListView.ItemsSource= Transactions.Where(t => t.Type == TransactionType.Shopping).ToList();
+            RentTransactionListView.ItemsSource = Transactions.Where(t => t.Type == TransactionType.Rent).ToList();
 
-            
+            TotalsLabel.Text = "$" + totalSpend + "  |   $  XXXX";
+
+            CarLabel.Text = "Car                      $" + TotalAmountByCategory["Car"];
+            EntertainmentLabel.Text = "Entertainment             $" + TotalAmountByCategory["Entertainment"];
+            FoodLabel.Text = "Food                     $" + TotalAmountByCategory["Food"];
+            MiscLabel.Text = "Misc                     $" + TotalAmountByCategory["Misc"];
+            ShoppingLabel.Text = "Shopping                 $" + TotalAmountByCategory["Shopping"];
+            RentLabel.Text = "Rent                     $" + TotalAmountByCategory["Rent"];
         }
 
         private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
