@@ -29,12 +29,28 @@ namespace ExpenseTrackingApp.Pages
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     $"{Path.GetRandomFileName()}.transaction.txt");
                 transactionDetails += filename+"\n";
-                transactionDetails += TransactionAmount.Text+"\n";
-                transactionDetails += TransactionDescription.Text + "\n";
-                transactionDetails += TransactionMonth.SelectedItem.ToString() + "\n";
-                transactionDetails += TransactionType.SelectedItem.ToString() + "\n";
-                transactionDetails += DateTime.Today.ToString()+"\n";
-                File.WriteAllText(filename, transactionDetails);
+                var amountText = TransactionAmount.Text;
+                double amount;
+                if (string.IsNullOrWhiteSpace(amountText) || !Double.TryParse(amountText, out amount))//if is not a number we show an alert
+                {
+                    await DisplayAlert("Alert", "Amount is not a valid number", "OK");
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(TransactionDescription.Text))
+                    {
+                        await DisplayAlert("Alert", "You have to write a description", "OK");
+                    }
+                    else
+                    {
+                        transactionDetails += amountText + "\n";
+                        transactionDetails += TransactionDescription.Text + "\n";
+                        transactionDetails += TransactionMonth.SelectedItem.ToString() + "\n";
+                        transactionDetails += TransactionType.SelectedItem.ToString() + "\n";
+                        transactionDetails += DateTime.Today.ToString() + "\n";
+                        File.WriteAllText(filename, transactionDetails);
+                    }
+                }
             }
             else
             {
