@@ -20,5 +20,6 @@ namespace ExpenseTrackingApp.Model
         public BudgetItemCategory BudgetItemCategory { get; set; }
 
         public int TotalAmount { get; set; }
+      
     }
 }

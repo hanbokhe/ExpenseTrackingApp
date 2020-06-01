@@ -21,6 +21,9 @@ namespace ExpenseTrackingApp.Pages
         public ObservableCollection<BudgetItem> BudgetItems { get; set; } = new ObservableCollection<BudgetItem>();
 
         private List<Entry> entries = new List<Entry>();
+        public double TotalBudget;
+        public double BudgetRemaining;
+        public double BudgetSpent;
 
         public BudgetPage()
         {
@@ -43,15 +46,24 @@ namespace ExpenseTrackingApp.Pages
 
         private void InitializeBudgetChart()
         {
-            entries.Add(new Entry(200) { Color = SKColor.Parse(Color.Red.ToHex())});
-            entries.Add(new Entry(100) { Color = SKColor.Parse(Color.Green.ToHex())});
-            entries.Add(new Entry(100) { Color = SKColor.Parse(Color.Blue.ToHex())});
+            var totalBudget = (float) BudgetManager.GetTotalBudget();
+            var budgetRemaining = (float)BudgetManager.GetBudgetRemaining();
+            var budgetSpent = (float) BudgetManager.GetBudgetSpent();
+
+
+            entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.Yellow.ToHex())});
+            entries.Add(new Entry(budgetRemaining) {  Color = SKColor.Parse(Color.Green.ToHex())});
             BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
+
+            lblRemaining.Text = $"Remaining = ${budgetRemaining}";
+            lblSpent.Text = $"Spent = ${budgetSpent}";
         }
 
         private async void BudgetItemsView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             await Navigation.PushModalAsync(new ListTransactionPage());
         }
+
+
     }
 }

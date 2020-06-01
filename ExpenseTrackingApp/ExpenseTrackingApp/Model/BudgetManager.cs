@@ -10,7 +10,7 @@ namespace ExpenseTrackingApp.Model
     public static class BudgetManager
     {
         private static List<BudgetItem> BudgetItems = new List<BudgetItem>();
-        private static Budget budget = new Budget (BudgetData.BudgetAmount);
+        private static Budget budget = new Budget(BudgetData.BudgetAmount);
         static BudgetManager()
         {
             InitializeBudgetItems();
@@ -45,5 +45,21 @@ namespace ExpenseTrackingApp.Model
             BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Rent, TotalAmount = 400 });
             BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Shopping, TotalAmount = 60 });
         }
+
+        public static double GetBudgetSpent()
+        {
+            return budget.BudgetSpent;
+        }
+
+        public static double GetTotalBudget()
+        {
+            return budget.TotalBudget;
+        }
+
+        public static double GetBudgetRemaining()
+        {
+            return budget.BudgetRemaining;
+        }
+
     }
 }
