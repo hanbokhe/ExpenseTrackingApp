@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ExpenseTrackingApp.Pages.AddBudget">
+    <ContentPage.Content>
+        <StackLayout>
+            <Editor x:Name="BudgetLimit"
+                    Placeholder="Enter Budget Amount"
+                    Text="{Binding Budget}"
+                    HeightRequest="50"/>
+
+            <Picker x:Name="BudgetType" Title ="Budget Type"  SelectedIndex="{Binding Type}" HorizontalOptions="FillAndExpand">
+                <Picker.Items>
+                    <x:String>Choose a </x:String>
+                    <x:String>Car</x:String>
+                    <x:String>Entertainment</x:String>
+                    <x:String>Food</x:String>
+                    <x:String>Misc</x:String>
+                    <x:String>Shopping</x:String>
+                    <x:String>Rent</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Picker x:Name="BudgetMonth" Title ="Budget Month" SelectedIndex="{Binding Month}" HorizontalOptions="FillAndExpand">
+                <Picker.Items>
+                    <x:String>Budget for the month of...</x:String>
+                    <x:String>January</x:String>
+                    <x:String>Feburary</x:String>
+                    <x:String>March</x:String>
+                    <x:String>April</x:String>
+                    <x:String>May</x:String>
+                    <x:String>June</x:String>
+                    <x:String>July</x:String>
+                    <x:String>August</x:String>
+                    <x:String>September</x:String>
+                    <x:String>October</x:String>
+                    <x:String>November</x:String>
+                    <x:String>December</x:String>
+                </Picker.Items>
+            </Picker>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Save" Clicked="OnSaveButton_Clicked"/>
+                <Button Text="Delete" Grid.Column="1" Clicked="OnDeleteButton_Clicked"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

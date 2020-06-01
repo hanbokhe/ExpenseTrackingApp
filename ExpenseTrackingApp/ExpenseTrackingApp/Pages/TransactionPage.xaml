@@ -6,14 +6,47 @@
              mc:Ignorable="d"
              x:Class="ExpenseTrackingApp.Pages.TransactionPage"
              Title="Transactions">
-    <ContentPage.Content>
+    
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <Style TargetType="Label">
+                    <Setter Property="FontFamily" Value="sans-serif" />
+                    <Setter Property="FontSize" Value="20" />
+                </Style>
+            </ResourceDictionary>
+        </ContentPage.Resources>
+        
         <StackLayout >
-            <Label Text="Transactions"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="Start" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Picker Grid.Column="0" x:Name="MonthPicker" Title ="Month" WidthRequest="400"  Margin="20,0,0,0" HorizontalOptions="Start">
+                    <Picker.Items>
+                        <x:String>January</x:String>
+                        <x:String>Feburary</x:String>
+                        <x:String>March</x:String>
+                        <x:String>April</x:String>
+                        <x:String>May</x:String>
+                        <x:String>June</x:String>
+                        <x:String>July</x:String>
+                        <x:String>August</x:String>
+                        <x:String>September</x:String>
+                        <x:String>October</x:String>
+                        <x:String>November</x:String>
+                        <x:String>December</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Button Grid.Column="1" Text="Add" Margin="0,0,5,0" HorizontalOptions="End" Clicked="AddTransactionButton_Clicked"/>
+            </Grid>
+            
             <Label x:Name="TotalsLabel" Text="" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Title"/>
             <Label Text="Total:    SPEND      REMAINING" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body"/>
-            <Button Text="Add Transaction" Clicked="AddTransactionButton_Clicked"/>
+
             <Label x:Name="CarLabel" Text="Car" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Start"/>
             <ListView x:Name="CarTransactionListView"
                   Margin="0,0,0,0"
@@ -81,5 +114,5 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-    </ContentPage.Content>
+
 </ContentPage>

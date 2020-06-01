@@ -10,6 +10,18 @@ namespace ExpenseTrackingApp.Model
 
     public class Budget
     {
+        public enum BudgetType
+        {
+            Car,
+            Entertainment,
+            Food,
+            Misc,
+            Shopping,
+            Rent,
+        }
+
+        public BudgetType Type { get; set; }
+        public decimal BudgetLimit { get; set; }
         public double TotalBudget { get; set; }
         public double Balance { 
             get 
@@ -23,16 +35,19 @@ namespace ExpenseTrackingApp.Model
                 return balance;
             } 
         }
-        public decimal BudgetLimit { get; set; }
+
 
         private List<Transaction> allTransactions = new List<Transaction>();
         public Budget(decimal budgetLimit)
         {
-            BudgetLimit = budgetLimit;
+            //this.Type = type;
+            //this.BudgetLimit = budgetLimit;
             if (BudgetLimit <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(budgetLimit), "Enter a larger budget");
             }
+            //this.TotalBudget = totalBudget;
+            //this.Balance = balance;
         }
 
         public void Spend(double amount, DateTime date, MonthBudget month, TransactionType type, string name)

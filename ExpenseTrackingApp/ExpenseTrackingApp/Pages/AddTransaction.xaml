@@ -4,46 +4,58 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Title="Add Transaction"
              x:Class="ExpenseTrackingApp.Pages.AddTransaction">
     <ContentPage.Content>
         <StackLayout>
-            <Editor x:Name="TransactionAmount"
+
+            <StackLayout Margin="20,20,20,0">
+                <Label Text="Add Transaction" FontSize="20"/>
+                <Editor x:Name="TransactionAmount"
                     Placeholder="Enter Transaction Amount"
                     Text="{Binding Text}"
                     HeightRequest="50"/>
-            <Editor x:Name="TransactionDescription"
+                <Editor x:Name="TransactionDescription"
                     Placeholder="Enter Transaction Description"
                     Text="{Binding Description}"
                     HeightRequest="50"/>
 
-            <Picker x:Name="TransactionType" Title ="Transaction Type"  SelectedIndex="{Binding Type}" HorizontalOptions="FillAndExpand">
-                <Picker.Items>
-                    <x:String>Car</x:String>
-                    <x:String>Entertainment</x:String>
-                    <x:String>Food</x:String>
-                    <x:String>Misc</x:String>
-                    <x:String>Shopping</x:String>
-                    <x:String>Rent</x:String>
-                </Picker.Items>
-            </Picker>
+                <Picker x:Name="TransactionType" Title ="Choose Transaction Type" HorizontalOptions="FillAndExpand">
+                    <Picker.Items>
+                        <x:String>Car</x:String>
+                        <x:String>Entertainment</x:String>
+                        <x:String>Food</x:String>
+                        <x:String>Misc</x:String>
+                        <x:String>Shopping</x:String>
+                        <x:String>Rent</x:String>
+                    </Picker.Items>
+                </Picker>
 
-            <Picker x:Name="TransactionMonth" Title ="Budget Month" SelectedIndex="{Binding Month}" HorizontalOptions="FillAndExpand">
-                <Picker.Items>
-                    <x:String>January</x:String>
-                    <x:String>Feburary</x:String>
-                    <x:String>March</x:String>
-                    <x:String>April</x:String>
-                    <x:String>May</x:String>
-                    <x:String>June</x:String>
-                    <x:String>July</x:String>
-                    <x:String>August</x:String>
-                    <x:String>September</x:String>
-                    <x:String>October</x:String>
-                    <x:String>November</x:String>
-                    <x:String>December</x:String>
-                </Picker.Items>
-            </Picker>
-            <Button Text="Save" Clicked="OnSaveButton_Clicked" />
+                <Picker x:Name="TransactionMonth" Title ="Choose Budget Month" HorizontalOptions="FillAndExpand">
+                    <Picker.Items>
+                        <x:String>January</x:String>
+                        <x:String>Feburary</x:String>
+                        <x:String>March</x:String>
+                        <x:String>April</x:String>
+                        <x:String>May</x:String>
+                        <x:String>June</x:String>
+                        <x:String>July</x:String>
+                        <x:String>August</x:String>
+                        <x:String>September</x:String>
+                        <x:String>October</x:String>
+                        <x:String>November</x:String>
+                        <x:String>December</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Text="Save" Clicked="OnSaveButton_Clicked"/>
+                    <Button Text="Delete" Grid.Column="1" Clicked="OnDeleteButton_Clicked"/>
+                </Grid>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

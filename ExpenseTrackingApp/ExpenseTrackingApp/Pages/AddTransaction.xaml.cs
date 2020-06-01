@@ -33,13 +33,13 @@ namespace ExpenseTrackingApp.Pages
                 double amount;
                 if (string.IsNullOrWhiteSpace(amountText) || !Double.TryParse(amountText, out amount))//if is not a number we show an alert
                 {
-                    await DisplayAlert("Alert", "Amount is not a valid number", "OK");
+                    await DisplayAlert("Alert", "Please enter a valid number", "OK");
                 }
                 else
                 {
                     if (string.IsNullOrWhiteSpace(TransactionDescription.Text))
                     {
-                        await DisplayAlert("Alert", "You have to write a description", "OK");
+                        await DisplayAlert("Alert", "Write a description", "OK");
                     }
                     else
                     {
@@ -57,7 +57,15 @@ namespace ExpenseTrackingApp.Pages
                 //Message 
                
             }
-
+            await Navigation.PopModalAsync();
+        }
+        private async void OnDeleteButton_Clicked(object sender, EventArgs e)
+        {
+            var transaction = (Transaction)BindingContext;
+            if (File.Exists(transaction.Name))
+            {
+                File.Delete(transaction.Name);
+            }
             await Navigation.PopModalAsync();
         }
     }

@@ -10,7 +10,7 @@ namespace ExpenseTrackingApp.Model
     public static class BudgetManager
     {
         private static List<BudgetItem> BudgetItems = new List<BudgetItem>();
-        private static Budget budget = new Budget(BudgetData.BudgetAmount);
+        private static Budget budget = new Budget (BudgetData.BudgetAmount);
         static BudgetManager()
         {
             InitializeBudgetItems();
