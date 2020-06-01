@@ -41,8 +41,8 @@ namespace ExpenseTrackingApp.Model
         public Budget(decimal budgetLimit)
         {
             //this.Type = type;
-            //this.BudgetLimit = budgetLimit;
-            if (BudgetLimit <= 0)
+            this.BudgetLimit = budgetLimit;
+            if (this.BudgetLimit <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(budgetLimit), "Enter a larger budget");
             }
