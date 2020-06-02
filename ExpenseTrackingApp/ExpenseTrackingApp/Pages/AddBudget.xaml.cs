@@ -1,6 +1,8 @@
 ﻿using ExpenseTrackingApp.Model;
+using ExpenseTrackingApp.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,53 +16,35 @@ namespace ExpenseTrackingApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddBudget : ContentPage
     {
-        public AddBudget()
+        private MonthBudget monthBudget;
+        private ObservableCollection<BudgetItem> BudgetItems;
+
+        public AddBudget(MonthBudget monthBudget, ObservableCollection<BudgetItem> budgetItems)
         {
             InitializeComponent();
 
-
+            this.monthBudget = monthBudget;
+            this.BudgetItems = budgetItems;
         }
+
         private async void OnSaveButton_Clicked(object sender, EventArgs e)
         {
-            var budget = (Budget)BindingContext;
-            var budgetDetails = "";
-            if (string.IsNullOrEmpty(budget.Month)) 
+            var budgetLimit = double.Parse(this.TotalBudget.Text);
+            if (BudgetManager.BudgetExists(monthBudget))
             {
-                //create and save
-                var filename = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    $"{Path.GetRandomFileName()}.budget.txt");
-                budgetDetails += filename + "\n";
-                var budgetAmount = BudgetLimitEditor.Text;
-                double amount;
-                if (string.IsNullOrWhiteSpace(budgetAmount) || !Double.TryParse(budgetAmount, out amount))//if is not a number we show an alert
-                {
-                    await DisplayAlert("Alert", "Please enter a valid number", "OK");
-                }
-                else
-                {
-                        budgetDetails += BudgetType.SelectedItem+ "\n";
-                        budgetDetails += budgetAmount + "\n";
-                        budgetDetails += BudgetMonth.SelectedItem += "\n";
-                        budgetDetails += "100\n";
-                        budgetDetails +=  "100\n";
-                        budgetDetails += "10\n";
-                        File.WriteAllText(filename, budgetDetails);
-                    }
-                await DisplayAlert("Alert", filename, "OK");
+                BudgetManager.UpdateBudgetLimit(monthBudget, budgetLimit);
             }
             else
             {
-                await DisplayAlert("Alert", budget.Month, "OK");
-                //Message 
-
+                BudgetManager.CreateBudget(monthBudget, budgetLimit);
             }
 
             await Navigation.PopModalAsync();
         }
-            private async void OnDeleteButton_Clicked(object sender, EventArgs e)
+
+        private async void OnDeleteButton_Clicked(object sender, EventArgs e)
         {
-            //var budget = (Budget)BindingContext;
+            var budget = (Budget)BindingContext;
             //if (File.Exists(Budget.Type))
             //{
             //    File.Delete(Budget.Name);

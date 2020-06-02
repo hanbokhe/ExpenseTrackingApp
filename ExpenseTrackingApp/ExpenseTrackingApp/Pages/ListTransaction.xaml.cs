@@ -16,16 +16,20 @@ namespace ExpenseTrackingApp.Pages
     {
         public ObservableCollection<ExpenseTrackingApp.Model.Transaction> Transactions { get; set; } = new ObservableCollection<ExpenseTrackingApp.Model.Transaction>();
 
-        public ListTransactionPage()
+        private MonthBudget monthBudget;
+
+        public ListTransactionPage(MonthBudget monthBudget)
         {
             InitializeComponent();
+            this.monthBudget = monthBudget;
+
             this.InitializeTransactionItems();
         }
 
         private void InitializeTransactionItems()
         {
             TransactionItemsView.ItemsSource = Transactions;
-            var transactions = BudgetManager.GetTransactions(TransactionType.Food);
+            var transactions = BudgetManager.GetTransactions(TransactionType.Food, monthBudget);
             transactions.ForEach(transaction => Transactions.Add(transaction));
         }
     }

@@ -10,8 +10,7 @@ namespace ExpenseTrackingApp.Model
 
     internal class Budget
     {
-        public double BudgetLimit { get; set; }
-        public double TotalBudget { get; set; }
+        public double BudgetLimit { get; private set; }
 
         public double BudgetSpent { 
             get 
@@ -34,6 +33,16 @@ namespace ExpenseTrackingApp.Model
             }
         }
 
+        public void UpdateBudgetLimit(double budgetLimit)
+        {
+            if (budgetLimit <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(budgetLimit), "Enter a larger budget");
+            }
+
+            this.BudgetLimit = budgetLimit;
+        }
+
         public double GetAmountSpent(TransactionType transactionType)
         {
             var transactions = this.GetTransactions(transactionType);
@@ -46,7 +55,7 @@ namespace ExpenseTrackingApp.Model
             return budgetSpent;
         }
 
-        public List<TransactionType> GetAllTransactionTypes()
+        public static List<TransactionType> GetAllTransactionTypes()
         {
             return Enum.GetValues(typeof(TransactionType)).Cast<TransactionType>().ToList();
         }
@@ -55,14 +64,11 @@ namespace ExpenseTrackingApp.Model
         
         public Budget(double budgetLimit)
         {
-            //this.Type = type;
-            this.BudgetLimit = budgetLimit;
-            if (this.BudgetLimit <= 0)
+            if (budgetLimit <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(budgetLimit), "Enter a larger budget");
             }
-            //this.TotalBudget = totalBudget;
-            //this.Balance = balance;
+            this.BudgetLimit = budgetLimit;
         }
 
         public void Spent(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
