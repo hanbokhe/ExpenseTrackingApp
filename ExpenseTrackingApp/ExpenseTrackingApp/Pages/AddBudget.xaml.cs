@@ -55,14 +55,18 @@ namespace ExpenseTrackingApp.Pages
             await Navigation.PopModalAsync();
         }
 
-        private  void OnDeleteButton_Clicked(object sender, EventArgs e)
+        private async void OnDeleteButton_Clicked(object sender, EventArgs e)
         {
             //var budget = (Budget)BindingContext;
             //if (File.Exists(Budget.Type))
             //{
             //    File.Delete(Budget.Name);
             //}
-            //await Navigation.PopModalAsync();
+            await Navigation.PopModalAsync();
         }
     }
 }
+
+
+
+

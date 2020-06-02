@@ -17,24 +17,25 @@ namespace ExpenseTrackingApp.Model
 
         public double TotalBudget { get; set; }
 
-        public double BudgetSpent { 
-            get 
+        public double BudgetSpent
+        {
+            get
             {
                 double budgetSpent = 0;
                 foreach (var transaction in allTransactions)
                 {
                     budgetSpent += transaction.Amount;
-                    
+
                 }
                 return budgetSpent;
-            } 
+            }
         }
 
         public double BudgetRemaining
         {
             get
             {
-               return this.BudgetLimit - this.BudgetSpent;
+                return this.BudgetLimit - this.BudgetSpent;
             }
         }
 
@@ -66,7 +67,7 @@ namespace ExpenseTrackingApp.Model
         }
 
         private List<Transaction> allTransactions = new List<Transaction>();
-        
+
         public Budget(double budgetLimit)
         {
             if (budgetLimit <= 0)

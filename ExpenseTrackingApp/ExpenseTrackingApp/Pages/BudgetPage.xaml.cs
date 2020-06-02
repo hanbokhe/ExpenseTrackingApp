@@ -22,7 +22,6 @@ namespace ExpenseTrackingApp.Pages
     {
         public ObservableCollection<BudgetItem> BudgetItems { get; set; } = new ObservableCollection<BudgetItem>();
 
-        private List<Entry> entries = new List<Entry>();
         private List<Budget> BudgetList;
         private List<Transaction> TransactionsList;
         public double TotalBudget, TotalTransactions;
@@ -35,10 +34,12 @@ namespace ExpenseTrackingApp.Pages
             InitializeComponent();
             BudgetList = new List<Budget>();
             TransactionsList = new List<Transaction>();
+
+            MonthPicker.SelectedIndex = DateTime.Now.Month - 1;//current month selected by default
+            MonthBudget = DateTime.Now.Month.ToString("MMM");
+
             this.InitializeBudgetItems();
             this.InitializeBudgetChart();
-            MonthPicker.SelectedIndex = DateTime.Now.Month - 1;//current month selected by default
-            MonthBudget = DateTime.Now.Month.ToString("MMM");       
         }
 
         private void InitializeBudgetItems()
@@ -153,18 +154,19 @@ namespace ExpenseTrackingApp.Pages
 
         private void InitializeBudgetChart()
         {
-            //var totalBudget = (float) BudgetManager.GetTotalBudget();
-            //var budgetRemaining = (float)BudgetManager.GetBudgetRemaining();
-            //var budgetSpent = (float) BudgetManager.GetBudgetSpent();
+            var monthBudget = (MonthBudget)Enum.Parse(typeof(MonthBudget), this.MonthPicker.SelectedItem.ToString());
+            var totalBudget = (float)BudgetManager.GetTotalBudget(monthBudget);
+            var budgetRemaining = (float)BudgetManager.GetBudgetRemaining(monthBudget);
+            var budgetSpent = (float)BudgetManager.GetBudgetSpent(monthBudget);
 
+            var entries = new List<Entry>();
+            entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.Yellow.ToHex()) });
+            entries.Add(new Entry(budgetRemaining) { Color = SKColor.Parse(Color.Green.ToHex()) });
+            BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
 
-            //entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.Yellow.ToHex())});
-            //entries.Add(new Entry(budgetRemaining) {  Color = SKColor.Parse(Color.Green.ToHex())});
-            //BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
-
-            //lblRemaining.Text = $"Remaining = ${budgetRemaining}";
-            //lblSpent.Text = $"Spent = ${budgetSpent}";
-        }
+            lblRemaining.Text = $"Remaining = ${budgetRemaining}";
+            lblSpent.Text = $"Spent = ${budgetSpent}";
+        }                                                    
 
         //private async void BudgetItemsView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         //{
@@ -213,9 +215,15 @@ namespace ExpenseTrackingApp.Pages
                 totalTransactions += t.Amount;
             }
             TotalTransactions = totalTransactions;
-            lblSpent.Text = "  Spent "+ String.Format("{0:C2}", Convert.ToInt32(totalTransactions));
-            lblRemaining.Text = "Remaining  "+ String.Format("{0:C2}", Convert.ToInt32(totalBudget - totalTransactions));
+            var spent = Convert.ToInt32(totalTransactions);
+            var remaining = Convert.ToInt32(totalBudget - totalTransactions);
+            lblSpent.Text = "  Spent "+ String.Format("{0:C2}", spent);
+            lblRemaining.Text = "Remaining  "+ String.Format("{0:C2}", remaining);
 
+            var entries = new List<Entry>();
+            entries.Add(new Entry(spent) { Color = SKColor.Parse(Color.Yellow.ToHex()) });
+            entries.Add(new Entry(remaining) { Color = SKColor.Parse(Color.Green.ToHex()) });
+            BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
         }
     }
 }

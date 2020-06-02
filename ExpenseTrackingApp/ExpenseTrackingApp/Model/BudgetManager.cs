@@ -10,7 +10,7 @@ namespace ExpenseTrackingApp.Model
     public static class BudgetManager
     {
         private static Dictionary<MonthBudget, Budget> budgetDictionary;
-        private static MonthBudget currentMonth;
+        //private static MonthBudget currentMonth;
 
         static BudgetManager()
         {
