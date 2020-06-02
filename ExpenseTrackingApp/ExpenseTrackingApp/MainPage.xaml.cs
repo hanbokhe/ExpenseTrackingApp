@@ -16,10 +16,10 @@ namespace ExpenseTrackingApp
             this.Title = "TabbedPage";
 
             InitializeComponent();
-            Children.Add(new AccountPage());
+            //Children.Add(new AccountPage());
             Children.Add(new BudgetPage());
             Children.Add(new TransactionPage());
-            Children.Add(new TrendsPage());
+            //Children.Add(new TrendsPage());
         }
     }
 }
