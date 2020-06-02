@@ -8,41 +8,56 @@ using Xamarin.Forms.Internals;
 namespace ExpenseTrackingApp.Model
 {
 
-    public class Budget
+    internal class Budget
     {
-        public enum BudgetType
-        {
-            Car,
-            Entertainment,
-            Food,
-            Misc,
-            Shopping,
-            Rent,
-        }
-
-        public BudgetType Type { get; set; }
-        public decimal BudgetLimit { get; set; }
+        public double BudgetLimit { get; set; }
         public double TotalBudget { get; set; }
-        public double Balance { 
+
+        public double BudgetSpent { 
             get 
             {
-                double balance = 0;
+                double budgetSpent = 0;
                 foreach (var transaction in allTransactions)
                 {
-                    balance += transaction.Amount;
+                    budgetSpent += transaction.Amount;
                     
                 }
-                return balance;
+                return budgetSpent;
             } 
         }
 
+        public double BudgetRemaining
+        {
+            get
+            {
+               return this.BudgetLimit - this.BudgetSpent;
+            }
+        }
+
+        public double GetAmountSpent(TransactionType transactionType)
+        {
+            var transactions = this.GetTransactions(transactionType);
+            double budgetSpent = 0;
+            foreach (var transaction in transactions)
+            {
+                budgetSpent += transaction.Amount;
+            }
+
+            return budgetSpent;
+        }
+
+        public List<TransactionType> GetAllTransactionTypes()
+        {
+            return Enum.GetValues(typeof(TransactionType)).Cast<TransactionType>().ToList();
+        }
 
         private List<Transaction> allTransactions = new List<Transaction>();
-        public Budget(decimal budgetLimit)
+        
+        public Budget(double budgetLimit)
         {
             //this.Type = type;
-            //this.BudgetLimit = budgetLimit;
-            if (BudgetLimit <= 0)
+            this.BudgetLimit = budgetLimit;
+            if (this.BudgetLimit <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(budgetLimit), "Enter a larger budget");
             }
@@ -50,7 +65,7 @@ namespace ExpenseTrackingApp.Model
             //this.Balance = balance;
         }
 
-        public void Spend(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
+        public void Spent(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
         {
             if (amount <= 0)
             {

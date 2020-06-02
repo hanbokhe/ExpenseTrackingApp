@@ -6,7 +6,7 @@ namespace ExpenseTrackingApp.Data
 {
     public static class BudgetData
     {
-        public static decimal BudgetAmount { get; private set; }
+        public static double BudgetAmount { get; private set; }
 
         static BudgetData()
         {
