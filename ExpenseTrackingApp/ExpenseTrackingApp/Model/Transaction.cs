@@ -32,12 +32,12 @@ namespace ExpenseTrackingApp.Model
     public class Transaction
     {
         public string Name { get; set; }
-        public MonthBudget Month { get; set; }
+        public string Month { get; set; }
         public TransactionType Type { get; set; }
         public DateTime Date { get; set; }
         public double Amount { get; set; }
         public string FileName { get; set; }
-        public Transaction(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
+        public Transaction(double amount, DateTime date, string month, TransactionType type, string name)
         {
             this.Amount = amount;
             this.Date = DateTime.Now;

@@ -33,7 +33,7 @@ namespace ExpenseTrackingApp.Pages
             string transactionFileName = "", transactionName="";
             double transactionAmount;
             DateTime transactionDateTime;
-            MonthBudget transactionMonth;
+            string transactionMonth;
             TransactionType transactionType;
             string[] separator = new string[] { "\n"};
             string[] lines;
@@ -55,7 +55,7 @@ namespace ExpenseTrackingApp.Pages
                 transactionFileName = lines[0];
                 transactionAmount = double.Parse(lines[1]);
                 transactionName = lines[2];
-                transactionMonth = getMonthValue(lines[3]);
+                transactionMonth = lines[3];
                 transactionType = getTransactionType(lines[4]);
                 transactionDateTime = DateTime.Today; // we have to convert this property from file
                 totalSpend += transactionAmount;
@@ -73,34 +73,7 @@ namespace ExpenseTrackingApp.Pages
                 TotalAmountByCategory[lines[4].Trim()] = (double) TotalAmountByCategory[lines[4].Trim()] + transactionAmount;
             }
 
-            MonthBudget getMonthValue ( string value )
-            {
-                if (value.CompareTo("January") == 0)
-                    return MonthBudget.January;
-                if (value.CompareTo("February") == 0)
-                    return MonthBudget.February;
-                if (value.CompareTo("March") == 0)
-                    return MonthBudget.March;
-                if (value.CompareTo("April") == 0)
-                    return MonthBudget.April;
-                if (value.CompareTo("May") == 0)
-                    return MonthBudget.May;
-                if (value.CompareTo("June") == 0)
-                    return MonthBudget.June;
-                if (value.CompareTo("July") == 0)
-                    return MonthBudget.July;
-                if (value.CompareTo("August") == 0)
-                    return MonthBudget.August;
-                if (value.CompareTo("September") == 0)
-                    return MonthBudget.September;
-                if (value.CompareTo("October") == 0)
-                    return MonthBudget.October;
-                if (value.CompareTo("November") == 0)
-                    return MonthBudget.November;
-                else
-                    return MonthBudget.December;
-
-            }
+           
 
             TransactionType getTransactionType(string value)
             {
