@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,19 +18,29 @@ namespace ExpenseTrackingApp.Pages
 
         private MonthBudget monthBudget;
 
-        public ListTransactionPage(MonthBudget monthBudget)
+        public ListTransactionPage(MonthBudget monthBudget, string transactionType)
         {
             InitializeComponent();
             this.monthBudget = monthBudget;
 
-            this.InitializeTransactionItems();
+            this.InitializeTransactionItems(transactionType);
         }
 
-        private void InitializeTransactionItems()
+        private void InitializeTransactionItems(string transactionTypeStr)
         {
-            TransactionItemsView.ItemsSource = Transactions;
-            var transactions = BudgetManager.GetTransactions(TransactionType.Food, monthBudget);
-            transactions.ForEach(transaction => Transactions.Add(transaction));
+            var transactionType = (TransactionType)Enum.Parse(typeof(TransactionType), transactionTypeStr);
+            TransactionItemsView.ItemsSource = this.Transactions;
+            this.Transactions.Clear();
+            var transactions = BudgetManager.GetTransactions(transactionType, monthBudget);
+            if (transactions == null || transactions.Count == 0)
+            {
+                lblMessage.Text = $"No Transactions of type {transactionTypeStr} for month {monthBudget}";
+            }
+            else
+            {
+                lblMessage.Text = $"Transactions of type {transactionTypeStr} for month {monthBudget}";
+                transactions.ForEach(transaction => Transactions.Add(transaction));
+            }
         }
     }
 }

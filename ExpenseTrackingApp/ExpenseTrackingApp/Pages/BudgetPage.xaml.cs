@@ -68,8 +68,8 @@ namespace ExpenseTrackingApp.Pages
 
         private void InitializeBudgetItems(MonthBudget monthBudget)
         {
-            BudgetItemsView.ItemsSource = BudgetItems;
-
+            BudgetItemsView.ItemsSource = this.BudgetItems;
+            this.BudgetItems.Clear();
             var transactionTypes = BudgetManager.GetAllTransactionTypes(monthBudget);
             foreach (var transactionType in transactionTypes)
             {
@@ -80,7 +80,8 @@ namespace ExpenseTrackingApp.Pages
 
         private async void BudgetItemsView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            await Navigation.PushModalAsync(new ListTransactionPage(this.GetSelectedMonthBudget()));
+            var transactionType = ((BudgetItem)e.SelectedItem).TransactionType;
+            await Navigation.PushModalAsync(new ListTransactionPage(this.GetSelectedMonthBudget(), transactionType));
         }
 
         private async void OnAddButton_Clicked(object sender, EventArgs e)
