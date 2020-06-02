@@ -10,7 +10,12 @@ namespace ExpenseTrackingApp.Model
 
     internal class Budget
     {
-        public double BudgetLimit { get; private set; }
+        public double BudgetLimit { get; set; }
+        public string Month { get; set; }
+        public string Filename { get; set; }
+        public string Type { get; set; }
+
+        public double TotalBudget { get; set; }
 
         public double BudgetSpent { 
             get 
@@ -71,7 +76,7 @@ namespace ExpenseTrackingApp.Model
             this.BudgetLimit = budgetLimit;
         }
 
-        public void Spent(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
+        public void Spent(double amount, DateTime date, string month, TransactionType type, string name)
         {
             if (amount <= 0)
             {
@@ -81,7 +86,7 @@ namespace ExpenseTrackingApp.Model
             allTransactions.Add(spent);
 
         }
-        public void Save(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
+        public void Save(double amount, DateTime date, string month, TransactionType type, string name)
         {
             if (amount <= 0)
             {

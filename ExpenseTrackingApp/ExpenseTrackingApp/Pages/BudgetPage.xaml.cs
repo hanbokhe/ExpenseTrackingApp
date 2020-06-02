@@ -150,48 +150,30 @@ namespace ExpenseTrackingApp.Pages
             return filteredList;
         }
 
-            BudgetItemCategory GetBudgetItemCategory(string value)
-        {
-            if (value.CompareTo("Car") == 0)
-                return BudgetItemCategory.Car;
-            if (value.CompareTo("Entertainment") == 0)
-                return BudgetItemCategory.Entertainment;
-            if (value.CompareTo("Food") == 0)
-                return BudgetItemCategory.Food;
-            if (value.CompareTo("Misc") == 0)
-                return BudgetItemCategory.Misc;
-            if (value.CompareTo("Shopping") == 0)
-                return BudgetItemCategory.Shopping;
-            if (value.CompareTo("Rent") == 0)
-                return BudgetItemCategory.Rent;
-            else
-                return BudgetItemCategory.Total;
-
-             }
 
         private void InitializeBudgetChart()
         {
-            var totalBudget = (float) BudgetManager.GetTotalBudget();
-            var budgetRemaining = (float)BudgetManager.GetBudgetRemaining();
-            var budgetSpent = (float) BudgetManager.GetBudgetSpent();
+            //var totalBudget = (float) BudgetManager.GetTotalBudget();
+            //var budgetRemaining = (float)BudgetManager.GetBudgetRemaining();
+            //var budgetSpent = (float) BudgetManager.GetBudgetSpent();
 
 
-            entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.Yellow.ToHex())});
-            entries.Add(new Entry(budgetRemaining) {  Color = SKColor.Parse(Color.Green.ToHex())});
-            BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
+            //entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.Yellow.ToHex())});
+            //entries.Add(new Entry(budgetRemaining) {  Color = SKColor.Parse(Color.Green.ToHex())});
+            //BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
 
-            lblRemaining.Text = $"Remaining = ${budgetRemaining}";
-            lblSpent.Text = $"Spent = ${budgetSpent}";
+            //lblRemaining.Text = $"Remaining = ${budgetRemaining}";
+            //lblSpent.Text = $"Spent = ${budgetSpent}";
         }
 
-        private async void BudgetItemsView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            await Navigation.PushModalAsync(new ListTransactionPage());
-        }
+        //private async void BudgetItemsView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        //{
+        //    //await Navigation.PushModalAsync(new ListTransactionPage());
+        //}
 
         private async void EditButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new AddBudget { BindingContext = new Budget(100)});
+           //await Navigation.PushModalAsync(new AddBudget { BindingContext = new Budget(0) });
         }
 
         private void MonthPicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -211,15 +193,17 @@ namespace ExpenseTrackingApp.Pages
                 totalBudget += b.BudgetLimit;
                 this.BudgetItems.Add(new BudgetItem()
                 {
-                    BudgetItemCategory = GetBudgetItemCategory(b.Type),
-                    TotalAmount = b.BudgetLimit,
+                    TransactionType = b.Type,
+                    AmountBudget = b.BudgetLimit,
+                    AmountSpent=0,
                     Month = b.Month
                 }); ;
             }
             this.BudgetItems.Add(new BudgetItem
             {
-                BudgetItemCategory = BudgetItemCategory.Total,
-                TotalAmount = totalBudget,
+                TransactionType = "Total",
+                AmountBudget = totalBudget,
+                AmountSpent=0,
                 Month = MonthBudget
             });
             TotalBudget = totalBudget;
@@ -230,7 +214,7 @@ namespace ExpenseTrackingApp.Pages
             }
             TotalTransactions = totalTransactions;
             lblSpent.Text = "  Spent "+ String.Format("{0:C2}", Convert.ToInt32(totalTransactions));
-            lblRemaining.Text = "Remaining  "+ String.Format("{0:C}", Convert.ToInt32(totalBudget - totalTransactions));
+            lblRemaining.Text = "Remaining  "+ String.Format("{0:C2}", Convert.ToInt32(totalBudget - totalTransactions));
 
         }
     }

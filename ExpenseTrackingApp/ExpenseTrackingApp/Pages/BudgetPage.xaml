@@ -64,7 +64,7 @@
                 <Label Grid.Column="1" x:Name="lblRemaining" HorizontalTextAlignment="End"/>
             </Grid>
         </StackLayout>
-        <view:AlternatingListView Grid.Row="3" x:Name="BudgetItemsView" HasUnevenRows="True" ItemSelected="BudgetItemsView_ItemSelected">
+        <view:AlternatingListView Grid.Row="3" x:Name="BudgetItemsView" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:BudgetItem">
                     <ViewCell>
@@ -76,8 +76,8 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding BudgetItemCategory}" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                            <Label Text="{Binding TotalAmount}" Grid.Column="1" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <Label Grid.Column="0" Text="{Binding TransactionType}" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <Label Text="{Binding AmountBudget}" Grid.Column="1" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

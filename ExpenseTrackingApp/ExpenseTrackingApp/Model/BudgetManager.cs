@@ -1,5 +1,4 @@
 ﻿using ExpenseTrackingApp.Data;
-using ExpenseTrackingApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
