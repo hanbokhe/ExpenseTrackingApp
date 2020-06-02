@@ -36,8 +36,8 @@ namespace ExpenseTrackingApp.Pages
 
             this.InitializeBudgetChart(currentMonthBudget);
             this.InitializeBudgetItems(currentMonthBudget);
-
         }
+
         private void InitializeBudgetChart(MonthBudget monthBudget)
         {
             var totalBudget = (float)BudgetManager.GetTotalBudget(monthBudget);
