@@ -45,8 +45,12 @@ namespace ExpenseTrackingApp.Model
 
             return budgetSpent;
         }
+        public Budget()
+        {
 
-        public List<TransactionType> GetAllTransactionTypes()
+        }
+
+        public static List<TransactionType> GetAllTransactionTypes()
         {
             return Enum.GetValues(typeof(TransactionType)).Cast<TransactionType>().ToList();
         }

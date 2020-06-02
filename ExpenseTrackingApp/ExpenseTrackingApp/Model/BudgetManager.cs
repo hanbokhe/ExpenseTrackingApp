@@ -10,19 +10,45 @@ namespace ExpenseTrackingApp.Model
 {
     public static class BudgetManager
     {
-        private static Budget budget = new Budget(BudgetData.BudgetAmount);
+        private static Dictionary<MonthBudget, Budget> budgetDictionary;
+        private static MonthBudget currentMonth;
+
         static BudgetManager()
         {
+            budgetDictionary = new Dictionary<MonthBudget, Budget>();
         }
 
-        public static List<Transaction> GetTransactions(TransactionType transactionType)
+        public static bool BudgetExists(MonthBudget monthBudget)
         {
-            return budget.GetTransactions(transactionType);
+            if (budgetDictionary.ContainsKey(monthBudget))
+            {
+                var budget = budgetDictionary[monthBudget];
+                return true;
+            }
+
+            return false;
         }
 
-        public static double GetAmountSpent(TransactionType transactionType)
+        public static List<Transaction> GetTransactions(TransactionType transactionType, MonthBudget monthBudget)
         {
-            return budget.GetAmountSpent(transactionType);
+            if (budgetDictionary.ContainsKey(monthBudget))
+            {
+                var budget = budgetDictionary[monthBudget];
+                return budget.GetTransactions(transactionType);
+            }
+
+            return null;            
+        }
+
+        public static double GetAmountSpent(TransactionType transactionType, MonthBudget monthBudget)
+        {
+            if (budgetDictionary.ContainsKey(monthBudget))
+            {
+                var budget = budgetDictionary[monthBudget];
+                return budget.GetAmountSpent(transactionType);
+            }
+
+            return -1;
         }
 
         public static void AddTransaction(
@@ -34,24 +60,42 @@ namespace ExpenseTrackingApp.Model
 
         }
 
-        public static List<TransactionType> GetAllTransactionTypes()
+        public static List<TransactionType> GetAllTransactionTypes(MonthBudget monthBudget)
         {
-            return budget.GetAllTransactionTypes();
+            return Budget.GetAllTransactionTypes();
         }
 
-        public static double GetBudgetSpent()
+        public static double GetBudgetSpent(MonthBudget monthBudget)
         {
-            return budget.BudgetSpent;
+            if (budgetDictionary.ContainsKey(monthBudget))
+            {
+                var budget = budgetDictionary[monthBudget];
+                return budget.BudgetSpent;
+            }
+
+            return -1;
         }
 
-        public static double GetTotalBudget()
+        public static double GetTotalBudget(MonthBudget monthBudget)
         {
-            return budget.TotalBudget;
+            if (budgetDictionary.ContainsKey(monthBudget))
+            {
+                var budget = budgetDictionary[monthBudget];
+                return budget.TotalBudget;
+            }
+
+            return -1;
         }
 
-        public static double GetBudgetRemaining()
+        public static double GetBudgetRemaining(MonthBudget monthBudget)
         {
-            return budget.BudgetRemaining;
+            if (budgetDictionary.ContainsKey(monthBudget))
+            {
+                var budget = budgetDictionary[monthBudget];
+                return budget.BudgetRemaining;
+            }
+
+            return -1;
         }
     }
 }

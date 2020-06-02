@@ -48,7 +48,7 @@
                         <x:String>December</x:String>
                     </Picker.Items>
                 </Picker>
-                <Button Grid.Column="1" Text="Edit" Margin="0,0,5,0" HorizontalOptions="End" Clicked="OnEditButton_Clicked"/>
+                <Button Grid.Column="1" x:Name="btnAdd" Text="Add" Margin="0,0,5,0" HorizontalOptions="End" Clicked="OnAddButton_Clicked"/>
             </Grid>
         </StackLayout>
         <forms:ChartView Grid.Row="1" x:Name="BudgetChart" HeightRequest="150"></forms:ChartView>
