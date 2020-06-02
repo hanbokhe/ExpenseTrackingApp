@@ -173,7 +173,7 @@ namespace ExpenseTrackingApp.Pages
 
         private async void EditButton_Clicked(object sender, EventArgs e)
         {
-           //await Navigation.PushModalAsync(new AddBudget { BindingContext = new Budget(0) });
+           await Navigation.PushModalAsync(new AddBudget { BindingContext = new Budget(100) });
         }
 
         private void MonthPicker_SelectedIndexChanged(object sender, EventArgs e)
