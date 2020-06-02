@@ -7,12 +7,12 @@
              x:Class="ExpenseTrackingApp.Pages.AddBudget">
     <ContentPage.Content>
         <StackLayout>
-            <Editor x:Name="BudgetLimit"
+            <Editor x:Name="BudgetLimitEditor"
                     Placeholder="Enter Budget Amount"
-                    Text="{Binding Budget}"
+                    Text=""
                     HeightRequest="50"/>
 
-            <Picker x:Name="BudgetType" Title ="Budget Type"  SelectedIndex="{Binding Type}" HorizontalOptions="FillAndExpand">
+            <Picker x:Name="BudgetType" Title ="Budget Type"   HorizontalOptions="FillAndExpand">
                 <Picker.Items>
                     <x:String>Choose a </x:String>
                     <x:String>Car</x:String>
@@ -24,7 +24,7 @@
                 </Picker.Items>
             </Picker>
 
-            <Picker x:Name="BudgetMonth" Title ="Budget Month" SelectedIndex="{Binding Month}" HorizontalOptions="FillAndExpand">
+            <Picker x:Name="BudgetMonth" Title ="Budget Month"  HorizontalOptions="FillAndExpand">
                 <Picker.Items>
                     <x:String>Budget for the month of...</x:String>
                     <x:String>January</x:String>

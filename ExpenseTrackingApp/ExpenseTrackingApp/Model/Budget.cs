@@ -10,19 +10,11 @@ namespace ExpenseTrackingApp.Model
 
     public class Budget
     {
-        public enum BudgetType
-        {
-            Car,
-            Entertainment,
-            Food,
-            Misc,
-            Shopping,
-            Rent,
-        }
-
-        public BudgetType Type { get; set; }
+        public string Type { get; set; }
         public double BudgetLimit { get; set; }
         public double TotalBudget { get; set; }
+        public string Filename { get; set; }
+        public string Month { get; set; }
         public double BudgetSpent { 
             get 
             {
@@ -53,6 +45,7 @@ namespace ExpenseTrackingApp.Model
         
 
         private List<Transaction> allTransactions = new List<Transaction>();
+
         public Budget(double budgetLimit)
         {
             //this.Type = type;
@@ -64,8 +57,12 @@ namespace ExpenseTrackingApp.Model
             //this.TotalBudget = totalBudget;
             //this.Balance = balance;
         }
+        public Budget(string month)
+        {
+            this.Month = month;
+        }
 
-        public void Spent(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
+        public void Spent(double amount, DateTime date, string month, TransactionType type, string name)
         {
             if (amount <= 0)
             {
@@ -75,7 +72,7 @@ namespace ExpenseTrackingApp.Model
             allTransactions.Add(spent);
 
         }
-        public void Save(double amount, DateTime date, MonthBudget month, TransactionType type, string name)
+        public void Save(double amount, DateTime date, string month, TransactionType type, string name)
         {
             if (amount <= 0)
             {

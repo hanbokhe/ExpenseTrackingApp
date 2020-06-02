@@ -12,6 +12,7 @@ namespace ExpenseTrackingApp.Model
         Gas,
         Rent,
         Shopping,
+        Misc,
         Total,
     }
 
@@ -19,7 +20,11 @@ namespace ExpenseTrackingApp.Model
     {
         public BudgetItemCategory BudgetItemCategory { get; set; }
 
-        public int TotalAmount { get; set; }
+        public double TotalAmount { get; set; }
+
+        public string Filename { get; set; }
+
+        public string Month { get; set; }
       
     }
 }
