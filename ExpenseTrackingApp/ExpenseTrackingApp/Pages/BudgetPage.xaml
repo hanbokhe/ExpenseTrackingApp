@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:model="clr-namespace:ExpenseTrackingApp.Model"
              xmlns:view="clr-namespace:ExpenseTrackingApp.View" 
-             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" xmlns:viewmodel="clr-namespace:ExpenseTrackingApp.ViewModel"
              mc:Ignorable="d"
              x:Class="ExpenseTrackingApp.Pages.BudgetPage"
             Title="Budget">
@@ -48,7 +48,7 @@
                         <x:String>December</x:String>
                     </Picker.Items>
                 </Picker>
-                <Button Grid.Column="1" Text="Edit" Margin="0,0,5,0" HorizontalOptions="End"/>
+                <Button Grid.Column="1" Text="Edit" Margin="0,0,5,0" HorizontalOptions="End" Clicked="OnEditButton_Clicked"/>
             </Grid>
         </StackLayout>
         <forms:ChartView Grid.Row="1" x:Name="BudgetChart" HeightRequest="150"></forms:ChartView>
@@ -56,7 +56,7 @@
         <StackLayout Grid.Row="2" Orientation="Horizontal">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" x:Name="lblSpent" HorizontalTextAlignment="Start"/>
@@ -65,7 +65,7 @@
         </StackLayout>
         <view:AlternatingListView Grid.Row="3" x:Name="BudgetItemsView" HasUnevenRows="True" ItemSelected="BudgetItemsView_ItemSelected">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:BudgetItem">
+                <DataTemplate x:DataType="viewmodel:BudgetItem">
                     <ViewCell>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -75,8 +75,8 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding BudgetItemCategory}" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                            <Label Text="{Binding TotalAmount}" Grid.Column="1" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <Label Grid.Column="0" Text="{Binding TransactionType}" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <Label Text="{Binding AmountSpent}" Grid.Column="1" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

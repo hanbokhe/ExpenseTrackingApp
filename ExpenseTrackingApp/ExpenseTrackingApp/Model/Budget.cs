@@ -8,21 +8,11 @@ using Xamarin.Forms.Internals;
 namespace ExpenseTrackingApp.Model
 {
 
-    public class Budget
+    internal class Budget
     {
-        public enum BudgetType
-        {
-            Car,
-            Entertainment,
-            Food,
-            Misc,
-            Shopping,
-            Rent,
-        }
-
-        public BudgetType Type { get; set; }
         public double BudgetLimit { get; set; }
         public double TotalBudget { get; set; }
+
         public double BudgetSpent { 
             get 
             {
@@ -34,25 +24,35 @@ namespace ExpenseTrackingApp.Model
                 }
                 return budgetSpent;
             } 
-           
         }
+
         public double BudgetRemaining
         {
             get
             {
-                double budgetRemaining = BudgetLimit;
-                foreach (var transaction in allTransactions)
-                {
-                    budgetRemaining -= transaction.Amount;
-                }
-                return budgetRemaining;
+               return this.BudgetLimit - this.BudgetSpent;
+            }
+        }
+
+        public double GetAmountSpent(TransactionType transactionType)
+        {
+            var transactions = this.GetTransactions(transactionType);
+            double budgetSpent = 0;
+            foreach (var transaction in transactions)
+            {
+                budgetSpent += transaction.Amount;
             }
 
+            return budgetSpent;
         }
-       
-        
+
+        public List<TransactionType> GetAllTransactionTypes()
+        {
+            return Enum.GetValues(typeof(TransactionType)).Cast<TransactionType>().ToList();
+        }
 
         private List<Transaction> allTransactions = new List<Transaction>();
+        
         public Budget(double budgetLimit)
         {
             //this.Type = type;

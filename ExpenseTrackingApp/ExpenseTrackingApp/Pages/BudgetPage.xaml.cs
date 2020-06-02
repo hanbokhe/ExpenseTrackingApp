@@ -1,4 +1,5 @@
 ﻿using ExpenseTrackingApp.Model;
+using ExpenseTrackingApp.ViewModel;
 using Microcharts;
 using SkiaSharp;
 using System;
@@ -21,9 +22,6 @@ namespace ExpenseTrackingApp.Pages
         public ObservableCollection<BudgetItem> BudgetItems { get; set; } = new ObservableCollection<BudgetItem>();
 
         private List<Entry> entries = new List<Entry>();
-        public double TotalBudget;
-        public double BudgetRemaining;
-        public double BudgetSpent;
 
         public BudgetPage()
         {
@@ -35,13 +33,13 @@ namespace ExpenseTrackingApp.Pages
         private void InitializeBudgetItems()
         {
             BudgetItemsView.ItemsSource = BudgetItems;
-            this.BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Total, TotalAmount = 1000 });
-            this.BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Car, TotalAmount = 100 });
-            this.BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Entertainment, TotalAmount = 40 });
-            this.BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Food, TotalAmount = 200 });
-            this.BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Gas, TotalAmount = 80 });
-            this.BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Rent, TotalAmount = 400 });
-            this.BudgetItems.Add(new BudgetItem() { BudgetItemCategory = BudgetItemCategory.Shopping, TotalAmount = 60 });
+
+            var transactionTypes = BudgetManager.GetAllTransactionTypes();
+            foreach (var transactionType in transactionTypes)
+            {
+                var amountSpent = BudgetManager.GetAmountSpent(transactionType);
+                this.BudgetItems.Add(new BudgetItem() { TransactionType = transactionType.ToString(), AmountSpent = amountSpent });
+            }
         }
 
         private void InitializeBudgetChart()
@@ -50,13 +48,15 @@ namespace ExpenseTrackingApp.Pages
             var budgetRemaining = (float)BudgetManager.GetBudgetRemaining();
             var budgetSpent = (float) BudgetManager.GetBudgetSpent();
 
-
-            entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.Yellow.ToHex())});
-            entries.Add(new Entry(budgetRemaining) {  Color = SKColor.Parse(Color.Green.ToHex())});
-            BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
-
-            lblRemaining.Text = $"Remaining = ${budgetRemaining}";
+            entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.Blue.ToHex())});
             lblSpent.Text = $"Spent = ${budgetSpent}";
+            lblSpent.TextColor = Color.Blue;
+
+            entries.Add(new Entry(budgetRemaining) {  Color = SKColor.Parse(Color.Green.ToHex())});
+            lblRemaining.Text = $"Remaining = ${budgetRemaining}";
+            lblRemaining.TextColor = Color.Green;
+
+            BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
         }
 
         private async void BudgetItemsView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -64,6 +64,9 @@ namespace ExpenseTrackingApp.Pages
             await Navigation.PushModalAsync(new ListTransactionPage());
         }
 
+        private void OnEditButton_Clicked(object sender, EventArgs e)
+        {
 
+        }
     }
 }
