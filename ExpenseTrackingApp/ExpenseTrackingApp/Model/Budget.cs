@@ -45,10 +45,6 @@ namespace ExpenseTrackingApp.Model
 
             return budgetSpent;
         }
-        public Budget()
-        {
-
-        }
 
         public static List<TransactionType> GetAllTransactionTypes()
         {

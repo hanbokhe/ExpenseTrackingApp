@@ -83,7 +83,7 @@ namespace ExpenseTrackingApp.Pages
 
         private async void OnAddButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new AddBudget { BindingContext = new Budget() });
+            await Navigation.PushModalAsync(new AddBudget(this.GetSelectedMonthBudget(), this.BudgetItems));
         }
 
         private MonthBudget GetSelectedMonthBudget()
