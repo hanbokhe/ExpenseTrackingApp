@@ -15,10 +15,11 @@
             <ColumnDefinition Width="50*" />
             <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
-        
+
         <Editor Grid.Row="0" x:Name="TotalBudget" Placeholder="Enter Budget Amount" Grid.ColumnSpan="2"/>
 
-        <view:AlternatingListView Grid.Row="1" x:Name="BudgetItemsView" HasUnevenRows="True" Grid.ColumnSpan="2">
+        <!-- Uncomment if we provide option to store category specific budget.
+        <view:AlternatingListView Grid.Row="1" x:Name="BudgetItemsView" HasUnevenRows="True" Grid.ColumnSpan="2" BindingContext="BudgetItems">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodel:BudgetItem">
                     <ViewCell>
@@ -36,7 +37,7 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </view:AlternatingListView>
+        </view:AlternatingListView>-->
 
         <Button Grid.Row="2" Grid.Column="0" Text="Save" Clicked="OnSaveButton_Clicked"/>
         <Button Grid.Row="2" Grid.Column="1" Text="Delete" Clicked="OnDeleteButton_Clicked"/>

@@ -22,11 +22,20 @@ namespace ExpenseTrackingApp.Model
         {
             if (budgetDictionary.ContainsKey(monthBudget))
             {
-                var budget = budgetDictionary[monthBudget];
                 return true;
             }
 
             return false;
+        }
+
+        public static void CreateBudget(MonthBudget monthBudget, double budgetLimit)
+        {
+            // Create Budget if it does not exit
+            if (!BudgetManager.BudgetExists(monthBudget))
+            {
+                var budget = new Budget(budgetLimit);
+                budgetDictionary.Add(monthBudget, budget);
+            }
         }
 
         public static List<Transaction> GetTransactions(TransactionType transactionType, MonthBudget monthBudget)
@@ -81,10 +90,19 @@ namespace ExpenseTrackingApp.Model
             if (budgetDictionary.ContainsKey(monthBudget))
             {
                 var budget = budgetDictionary[monthBudget];
-                return budget.TotalBudget;
+                return budget.BudgetLimit;
             }
 
             return -1;
+        }
+
+        public static void UpdateBudgetLimit(MonthBudget monthBudget, double budgetLimit)
+        {
+            if (budgetDictionary.ContainsKey(monthBudget))
+            {
+                var budget = budgetDictionary[monthBudget];
+                budget.UpdateBudgetLimit(budgetLimit);
+            }
         }
 
         public static double GetBudgetRemaining(MonthBudget monthBudget)

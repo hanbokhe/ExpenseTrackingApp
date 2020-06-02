@@ -17,8 +17,6 @@ namespace ExpenseTrackingApp.Pages
     {
         public ObservableCollection<BudgetItem> BudgetItems { get; set; } = new ObservableCollection<BudgetItem>();
 
-        private List<Entry> entries = new List<Entry>();
-
         public BudgetPage()
         {
             InitializeComponent();
@@ -27,22 +25,26 @@ namespace ExpenseTrackingApp.Pages
             // Get month name from current date
             var currentMonth = currentDate.ToString("MMMM", CultureInfo.InvariantCulture);
 
-            // Get the current month index
-            this.MonthPicker.SelectedIndex = currentDate.Month - 1;
+            // Set the current month index in the picker
+            this.MonthPicker.SelectedItem = currentMonth;
+        }
 
+        private void InitializePage(string currentMonth)
+        {
             // Convert the current month to MonthBudget
             var currentMonthBudget = (MonthBudget)Enum.Parse(typeof(MonthBudget), currentMonth);
 
             this.InitializeBudgetChart(currentMonthBudget);
             this.InitializeBudgetItems(currentMonthBudget);
-        }
 
+        }
         private void InitializeBudgetChart(MonthBudget monthBudget)
         {
             var totalBudget = (float)BudgetManager.GetTotalBudget(monthBudget);
             var budgetRemaining = (float)BudgetManager.GetBudgetRemaining(monthBudget);
             var budgetSpent = (float)BudgetManager.GetBudgetSpent(monthBudget);
 
+            var entries = new List<Entry>();
             entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.Blue.ToHex()) });
             lblSpent.Text = $"Spent = ${budgetSpent}";
             lblSpent.TextColor = Color.Blue;
@@ -89,6 +91,16 @@ namespace ExpenseTrackingApp.Pages
         private MonthBudget GetSelectedMonthBudget()
         {
             return (MonthBudget)Enum.Parse(typeof(MonthBudget), this.MonthPicker.SelectedItem.ToString());
+        }
+
+        protected override void OnAppearing()
+        {
+            this.InitializePage(this.MonthPicker.SelectedItem.ToString());
+        }
+
+        private void MonthPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.InitializePage(this.MonthPicker.SelectedItem.ToString());
         }
     }
 }

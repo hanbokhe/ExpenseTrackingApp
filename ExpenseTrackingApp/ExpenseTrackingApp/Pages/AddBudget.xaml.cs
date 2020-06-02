@@ -25,12 +25,19 @@ namespace ExpenseTrackingApp.Pages
 
             this.monthBudget = monthBudget;
             this.BudgetItems = budgetItems;
-
-            BudgetItemsView.ItemsSource = budgetItems;
         }
 
         private async void OnSaveButton_Clicked(object sender, EventArgs e)
         {
+            var budgetLimit = double.Parse(this.TotalBudget.Text);
+            if (BudgetManager.BudgetExists(monthBudget))
+            {
+                BudgetManager.UpdateBudgetLimit(monthBudget, budgetLimit);
+            }
+            else
+            {
+                BudgetManager.CreateBudget(monthBudget, budgetLimit);
+            }
 
             await Navigation.PopModalAsync();
         }
