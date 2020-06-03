@@ -25,7 +25,8 @@
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Picker Grid.Column="0" x:Name="MonthPicker" Title ="Month" WidthRequest="400"  Margin="20,0,0,0" HorizontalOptions="Start">
+                <Picker Grid.Column="0" x:Name="MonthPicker" Title ="Month" WidthRequest="400"  Margin="20,0,0,0" 
+                        SelectedIndexChanged="MonthPicker_SelectedIndexChanged" HorizontalOptions="Start">
                     <Picker.Items>
                         <x:String>January</x:String>
                         <x:String>Feburary</x:String>
@@ -45,7 +46,7 @@
             </Grid>
             
             <Label x:Name="TotalsLabel" Text="" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Title"/>
-            <Label Text="Total:    SPEND      REMAINING" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body"/>
+            <Label Text="Total:    SPEND             REMAINING" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body"/>
 
             <Label x:Name="CarLabel" Text="Car" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Start"/>
             <ListView x:Name="CarTransactionListView"
