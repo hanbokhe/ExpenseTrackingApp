@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace ExpenseTrackingApp.Pages
 {
@@ -18,7 +19,7 @@ namespace ExpenseTrackingApp.Pages
         private List<Budget> BudgetList;
         private string MonthTransactions;
         private System.Collections.Hashtable TotalAmountSpendByCategory;
-        private System.Collections.Hashtable TotalAmountBudgetByCategory;
+        private ObservableCollection<GroupedTransactionModel> GroupedTransactions { get; set; }
         private double TotalSpend, TotalBudget;
 
         public TransactionPage()
@@ -28,7 +29,7 @@ namespace ExpenseTrackingApp.Pages
             BudgetList = new List<Budget>();
             MonthTransactions = DateTime.Now.Month.ToString("MMM");
             TotalAmountSpendByCategory = new Hashtable();
-            TotalAmountBudgetByCategory = new Hashtable();
+            GroupedTransactions = new ObservableCollection<GroupedTransactionModel>();
             TotalSpend = 0; TotalBudget = 0;
             
         }
@@ -36,6 +37,7 @@ namespace ExpenseTrackingApp.Pages
         protected override void OnAppearing()
         {
             TransactionsList.Clear();
+            GroupedTransactions.Clear();
             InitializeBudgetItems();
             InitializeTransactionsItems();
             MonthPicker.SelectedIndex = DateTime.Now.Month - 1;//current month selected by default
@@ -157,26 +159,58 @@ namespace ExpenseTrackingApp.Pages
             TotalAmountSpendByCategory.Add("Shopping", 0.00);
             TotalAmountSpendByCategory.Add("Rent", 0.00);
             TotalSpend = 0; TotalBudget = 0;
+            var carGroup = new GroupedTransactionModel() { LongName = "Car     "+ 
+                String.Format("{0:C2}", TotalAmountSpendByCategory["Car"]), ShortName = "C" };
+            var entertainmentGroup = new GroupedTransactionModel() { LongName = "Entertainment        "+
+                String.Format("{0:C2}", TotalAmountSpendByCategory["Entertainment"]),ShortName = "E" };
+            var foodGroup = new GroupedTransactionModel() { LongName = "Food        "+
+                String.Format("{0:C2}", TotalAmountSpendByCategory["Food"]), ShortName = "F" };
+            var miscGroup = new GroupedTransactionModel() { LongName = "Misc      "+
+                String.Format("{0:C2}", TotalAmountSpendByCategory["Misc"]), ShortName = "M" };
+            var shoppingGroup = new GroupedTransactionModel() { LongName = "Shopping      "+
+                String.Format("{0:C2}", TotalAmountSpendByCategory["Shopping"]), ShortName = "S" };
+            var rentGroup = new GroupedTransactionModel() { LongName = "Rent       "+
+                String.Format("{0:C2}", TotalAmountSpendByCategory["Rent"]), ShortName = "R" };
+            
+            foreach(var c in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Car).ToList())
+            {
+                carGroup.Add(new TransactionModel() { Name = c.Name, Amount = c.Amount.ToString(), DateTransaction = c.Date.ToString() });
+            }
+            foreach (var e in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Entertainment).ToList())
+            {
+                entertainmentGroup.Add(new TransactionModel() { Name = e.Name, Amount = e.Amount.ToString(), DateTransaction = e.Date.ToString() });
+            }
+            foreach (var f in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Food).ToList())
+            {
+                foodGroup.Add(new TransactionModel() { Name = f.Name, Amount = f.Amount.ToString(), DateTransaction = f.Date.ToString() });
+            }
+            foreach (var m in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Misc).ToList())
+            {
+                miscGroup.Add(new TransactionModel() { Name = m.Name, Amount = m.Amount.ToString(), DateTransaction = m.Date.ToString() });
+            }
+            foreach (var s in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Shopping).ToList())
+            {
+                shoppingGroup.Add(new TransactionModel() { Name = s.Name, Amount = s.Amount.ToString(), DateTransaction = s.Date.ToString() });
+            }
+            foreach (var r in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Rent).ToList())
+            {
+                rentGroup.Add(new TransactionModel() { Name = r.Name, Amount = r.Amount.ToString(), DateTransaction = r.Date.ToString() });
+            }
+            GroupedTransactions.Clear();
+            GroupedTransactions.Add(carGroup);
+            GroupedTransactions.Add(entertainmentGroup);
+            GroupedTransactions.Add(foodGroup);
+            GroupedTransactions.Add(miscGroup);
+            GroupedTransactions.Add(shoppingGroup);
+            GroupedTransactions.Add(rentGroup);
 
-            CarTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Car).ToList();
-            EntertainmentTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Entertainment).ToList();
-            FoodTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Food).ToList();
-            MiscTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Misc).ToList();
-            ShoppingTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Shopping).ToList();
-            RentTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Rent).ToList();
-            foreach(var t in filteredTransactionsByMonth){
+            lstView.ItemsSource = GroupedTransactions;
+            foreach (var t in filteredTransactionsByMonth){
                 TotalAmountSpendByCategory[t.Type.ToString()] = t.Amount+(double)TotalAmountSpendByCategory[t.Type.ToString()];
                 TotalSpend += t.Amount;}
             foreach(var b in filteredBudgetListByMonth) { TotalBudget += b.TotalBudget; }
 
             TotalsLabel.Text = String.Format("{0:C2}", TotalSpend) + "       |        " + String.Format("{0:C2}", TotalBudget - TotalSpend);
-
-            CarLabel.Text = "Car                      $" + TotalAmountSpendByCategory["Car"];
-            EntertainmentLabel.Text = "Entertainment             $" + TotalAmountSpendByCategory["Entertainment"];
-            FoodLabel.Text = "Food                     $" + TotalAmountSpendByCategory["Food"];
-            MiscLabel.Text = "Misc                     $" + TotalAmountSpendByCategory["Misc"];
-            ShoppingLabel.Text = "Shopping                 $" + TotalAmountSpendByCategory["Shopping"];
-            RentLabel.Text = "Rent                     $" + TotalAmountSpendByCategory["Rent"];
         }
     
 
