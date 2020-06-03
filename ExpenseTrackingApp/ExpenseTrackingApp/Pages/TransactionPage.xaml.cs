@@ -101,10 +101,10 @@ namespace ExpenseTrackingApp.Pages
             TotalsLabel.Text = "$" + totalSpend + "  |   $  XXXX";
 
             CarLabel.Text = "Car                      $" + TotalAmountByCategory["Car"];
-            EntertainmentLabel.Text = "Entertainment             $" + TotalAmountByCategory["Entertainment"];
+            EntertainmentLabel.Text = "Entertainment     $" + TotalAmountByCategory["Entertainment"];
             FoodLabel.Text = "Food                     $" + TotalAmountByCategory["Food"];
             MiscLabel.Text = "Misc                     $" + TotalAmountByCategory["Misc"];
-            ShoppingLabel.Text = "Shopping                 $" + TotalAmountByCategory["Shopping"];
+            ShoppingLabel.Text = "Shopping              $" + TotalAmountByCategory["Shopping"];
             RentLabel.Text = "Rent                     $" + TotalAmountByCategory["Rent"];
         }
 

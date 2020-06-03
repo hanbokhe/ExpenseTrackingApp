@@ -9,11 +9,10 @@
     <ContentPage.Content>
         
         <StackLayout>
-            <Label Text="{Binding Name}"/>
+            <Label Text="{Binding Name}" />
             <Label Text="{Binding Amount}"/>
             <Label Text="{Binding Month}"/>
             <Label Text="{Binding Type}"/>
-            <Label Text="{Binding Date}"/>
             <Label Text="{Binding FileName}"/>
                 <Grid>
                     <Grid.ColumnDefinitions>

@@ -19,11 +19,15 @@
         <StackLayout >
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                    
+                
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Picker Grid.Column="0" x:Name="MonthPicker" Title ="Month" WidthRequest="400"  Margin="20,0,0,0" HorizontalOptions="Start">
                     <Picker.Items>
@@ -44,10 +48,10 @@
                 <Button Grid.Column="1" Text="Add" Margin="0,0,5,0" HorizontalOptions="End" Clicked="AddTransactionButton_Clicked"/>
             </Grid>
             
-            <Label x:Name="TotalsLabel" Text="" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Title"/>
-            <Label Text="Total:    SPEND      REMAINING" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body"/>
+            <Label x:Name="TotalsLabel" Grid.Row="1"  Text="" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" FontSize="Title"/>
+            <Label Text="Total:    SPEND      REMAINING" Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body" FontAttributes="Bold"/>
 
-            <Label x:Name="CarLabel" Text="Car" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Start"/>
+            <Label x:Name="CarLabel" Text="Car" Grid.Row="3" Margin="0,20,0,0" BackgroundColor="CadetBlue"   FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
             <ListView x:Name="CarTransactionListView"
                   Margin="0,0,0,0"
                   ItemSelected="OnListViewItemSelected">
@@ -58,7 +62,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label x:Name="EntertainmentLabel" Margin="0,0,0,0" Text="Entertainment" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Start"/>
+        <Label x:Name="EntertainmentLabel" Margin="0,0,0,0" Grid.Row="3" BackgroundColor="White"  Text="Entertainment" FontAttributes="Bold" FontSize="Large"  HorizontalOptions="Fill" HorizontalTextAlignment="Start"/> 
             <ListView x:Name="EntertainmentTransactionListView"
                   Margin="0,0,0,0"
                   ItemSelected="OnListViewItemSelected">
@@ -69,7 +73,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label x:Name="FoodLabel" Margin="0,0,0,0" Text="Food" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Start"/>
+        <Label x:Name="FoodLabel" Margin="0,0,0,0" Grid.Row="3" Text="Food" BackgroundColor="CadetBlue" FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
             <ListView x:Name="FoodTransactionListView"
                   Margin="0,0,0,0"
                   ItemSelected="OnListViewItemSelected">
@@ -80,7 +84,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label x:Name="MiscLabel" Margin="0,0,0,0" Text="Misc" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Start"/>
+        <Label x:Name="MiscLabel" Margin="0,0,0,0" Grid.Row="3" Text="Misc" BackgroundColor="White" FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
             <ListView x:Name="MiscTransactionListView"
                   Margin="0,0,0,0"
                   ItemSelected="OnListViewItemSelected">
@@ -91,7 +95,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label x:Name="ShoppingLabel" Margin="0,0,0,0" Text="Shopping" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Start"/>
+        <Label x:Name="ShoppingLabel" Margin="0,0,0,0" Grid.Row="3" BackgroundColor="CadetBlue" Text="Shopping" FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
             <ListView x:Name="ShoppingTransactionListView"
                   Margin="0,0,0,0"
                   ItemSelected="OnListViewItemSelected">
@@ -102,7 +106,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label x:Name="RentLabel" Margin="0,0,0,0" Text="Rent" FontAttributes="Bold" FontSize="Small" HorizontalOptions="Start"/>
+        <Label x:Name="RentLabel" Margin="0,0,0,0" Grid.Row="3" Text="Rent" BackgroundColor="White"  FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
             <ListView x:Name="RentTransactionListView"
                   Margin="0,0,0,0"
                   ItemSelected="OnListViewItemSelected">
