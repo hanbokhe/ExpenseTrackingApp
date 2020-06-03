@@ -15,8 +15,7 @@
                 </Style>
             </ResourceDictionary>
         </ContentPage.Resources>
-        
-        <StackLayout >
+    <StackLayout>
             <Grid>
                 <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -26,10 +25,11 @@
                 
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-            <Picker Grid.Column="0" x:Name="MonthPicker" Title ="Month" WidthRequest="400"  Margin="20,0,0,0" HorizontalOptions="Start">
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+                <Picker Grid.Column="0"  HorizontalOptions="StartAndExpand" x:Name="MonthPicker" Title ="Month"   Margin="0,0,0,0" SelectedIndexChanged="MonthPicker_SelectedIndexChanged">
                     <Picker.Items>
                         <x:String>January</x:String>
                         <x:String>Feburary</x:String>
@@ -45,78 +45,20 @@
                         <x:String>December</x:String>
                     </Picker.Items>
                 </Picker>
-                <Button Grid.Column="1" Text="Add" Margin="0,0,5,0" HorizontalOptions="End" Clicked="AddTransactionButton_Clicked"/>
+                <Button Grid.Column="1" Text="Add" Margin="0,0,5,0" HorizontalOptions="End"  Clicked="AddTransactionButton_Clicked"/>
             </Grid>
             
             <Label x:Name="TotalsLabel" Grid.Row="1"  Text="" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" FontSize="Title"/>
             <Label Text="Total:    SPEND      REMAINING" Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body" FontAttributes="Bold"/>
 
-            <Label x:Name="CarLabel" Text="Car" Grid.Row="3" Margin="0,20,0,0" BackgroundColor="CadetBlue"   FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
-            <ListView x:Name="CarTransactionListView"
-                  Margin="0,0,0,0"
-                  ItemSelected="OnListViewItemSelected">
-                <ListView.ItemTemplate >
-                    <DataTemplate >
-                        <TextCell  Text="{Binding Name}"
-                              Detail="{Binding Amount}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        <Label x:Name="EntertainmentLabel" Margin="0,0,0,0" Grid.Row="3" BackgroundColor="White"  Text="Entertainment" FontAttributes="Bold" FontSize="Large"  HorizontalOptions="Fill" HorizontalTextAlignment="Start"/> 
-            <ListView x:Name="EntertainmentTransactionListView"
-                  Margin="0,0,0,0"
-                  ItemSelected="OnListViewItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}"
-                              Detail="{Binding Amount}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        <Label x:Name="FoodLabel" Margin="0,0,0,0" Grid.Row="3" Text="Food" BackgroundColor="CadetBlue" FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
-            <ListView x:Name="FoodTransactionListView"
-                  Margin="0,0,0,0"
-                  ItemSelected="OnListViewItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}"
-                              Detail="{Binding Amount}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        <Label x:Name="MiscLabel" Margin="0,0,0,0" Grid.Row="3" Text="Misc" BackgroundColor="White" FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
-            <ListView x:Name="MiscTransactionListView"
-                  Margin="0,0,0,0"
-                  ItemSelected="OnListViewItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}"
-                              Detail="{Binding Amount}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        <Label x:Name="ShoppingLabel" Margin="0,0,0,0" Grid.Row="3" BackgroundColor="CadetBlue" Text="Shopping" FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
-            <ListView x:Name="ShoppingTransactionListView"
-                  Margin="0,0,0,0"
-                  ItemSelected="OnListViewItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}"
-                              Detail="{Binding Amount}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        <Label x:Name="RentLabel" Margin="0,0,0,0" Grid.Row="3" Text="Rent" BackgroundColor="White"  FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
-            <ListView x:Name="RentTransactionListView"
-                  Margin="0,0,0,0"
-                  ItemSelected="OnListViewItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}"
-                              Detail="{Binding Amount}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <ListView x:Name ="lstView" IsGroupingEnabled="true" GroupDisplayBinding="{Binding LongName}" 
+                   GroupShortNameBinding="{Binding ShortName}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail = "{Binding  Amount}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 
 </ContentPage>

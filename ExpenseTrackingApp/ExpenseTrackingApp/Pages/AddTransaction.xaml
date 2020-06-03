@@ -53,7 +53,9 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Button Text="Save" Clicked="OnSaveButton_Clicked"/>
-                    <Button Text="Delete" Grid.Column="1" Clicked="OnDeleteButton_Clicked"/>
+                    <!--Can't delete because there is no reference to transaction. Delete is on Detail Transaction page-->
+
+                    <Button Text="Back" Grid.Column="1" Clicked="OnBackButton_Clicked"/>
                 </Grid>
             </StackLayout>
         </StackLayout>

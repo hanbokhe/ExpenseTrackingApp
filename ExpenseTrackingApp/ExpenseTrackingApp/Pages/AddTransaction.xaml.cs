@@ -59,13 +59,9 @@ namespace ExpenseTrackingApp.Pages
             }
             await Navigation.PopModalAsync();
         }
-        private async void OnDeleteButton_Clicked(object sender, EventArgs e)
+        private async void OnBackButton_Clicked(object sender, EventArgs e)
         {
-            var transaction = (Transaction)BindingContext;
-            if (File.Exists(transaction.Name))
-            {
-                File.Delete(transaction.Name);
-            }
+           
             await Navigation.PopModalAsync();
         }
     }
