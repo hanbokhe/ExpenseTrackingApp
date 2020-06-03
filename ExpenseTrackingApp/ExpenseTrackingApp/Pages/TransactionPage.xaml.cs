@@ -14,101 +14,173 @@ namespace ExpenseTrackingApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TransactionPage : ContentPage
     {
-        private List<Transaction> Transactions;
-        private System.Collections.Hashtable TotalAmountByCategory;
-        private double totalSpend;
+        private List<Transaction> TransactionsList;
+        private List<Budget> BudgetList;
+        private string MonthTransactions;
+        private System.Collections.Hashtable TotalAmountSpendByCategory;
+        private System.Collections.Hashtable TotalAmountBudgetByCategory;
+        private double TotalSpend, TotalBudget;
 
         public TransactionPage()
         {
             InitializeComponent();
-            Transactions = new List<Transaction>();
-            TotalAmountByCategory = new Hashtable();
+            TransactionsList = new List<Transaction>();
+            BudgetList = new List<Budget>();
+            MonthTransactions = DateTime.Now.Month.ToString("MMM");
+            TotalAmountSpendByCategory = new Hashtable();
+            TotalAmountBudgetByCategory = new Hashtable();
+            TotalSpend = 0; TotalBudget = 0;
+            
         }
       
         protected override void OnAppearing()
         {
-            var files = Directory.EnumerateFiles(Environment.GetFolderPath(
-                Environment.SpecialFolder.LocalApplicationData), "*.transaction.txt");
-            string allText;
-            string transactionFileName = "", transactionName="";
-            double transactionAmount;
-            DateTime transactionDateTime;
-            string transactionMonth;
-            TransactionType transactionType;
-            string[] separator = new string[] { "\n"};
-            string[] lines;
-            totalSpend = 0;
-            Transactions.Clear();
-            TotalAmountByCategory.Clear();
-            //insert categories
-            TotalAmountByCategory.Add("Car", 0.00);
-            TotalAmountByCategory.Add("Entertainment", 0.00);
-            TotalAmountByCategory.Add("Food", 0.00);
-            TotalAmountByCategory.Add("Misc", 0.00);
-            TotalAmountByCategory.Add("Shopping", 0.00);
-            TotalAmountByCategory.Add("Rent", 0.00);
-
-            foreach (var filename in files)
+            TransactionsList.Clear();
+            InitializeBudgetItems();
+            InitializeTransactionsItems();
+            MonthPicker.SelectedIndex = DateTime.Now.Month - 1;//current month selected by default
+            MonthTransactions = MonthPicker.SelectedItem.ToString();
+            ReloadTransactionsByMonth();
+        }
+        private void InitializeBudgetItems()
             {
-                allText = File.ReadAllText(filename);
-                lines = allText.Split(separator, StringSplitOptions.None);
-                transactionFileName = lines[0];
-                transactionAmount = double.Parse(lines[1]);
-                transactionName = lines[2];
-                transactionMonth = lines[3];
-                transactionType = getTransactionType(lines[4]);
-                transactionDateTime = DateTime.Today; // we have to convert this property from file
-                totalSpend += transactionAmount;
-                Transactions.Add(new Transaction
+                //Showing the budget for the month selected on monthpicker. By default is the current month
+                var files = Directory.EnumerateFiles(Environment.GetFolderPath(
+                    Environment.SpecialFolder.LocalApplicationData), "*.budget.txt");
+                string allText = "";
+                string budgetFilename, month;
+                string budgetType;
+                double budgetAmount, budgetLimit, budgetSpent, budgetRemaining;
+                BudgetList.Clear();
+                string[] separator = new string[] { "\n" };
+                string[] lines;
+                foreach (var filename in files)
                 {
-                    Amount = transactionAmount,
-                    Date = transactionDateTime,
-                    Name = transactionName,
-                    Month = transactionMonth,
-                    Type = transactionType,
-                    FileName = transactionFileName
-
-                });
-
-                TotalAmountByCategory[lines[4].Trim()] = (double) TotalAmountByCategory[lines[4].Trim()] + transactionAmount;
+                    allText = File.ReadAllText(filename);
+                    lines = allText.Split(separator, StringSplitOptions.None);
+                    budgetFilename = lines[0];
+                    budgetType = lines[1].Trim();
+                    budgetAmount = double.Parse(lines[2].Trim());
+                    month = lines[3];
+                    budgetLimit = double.Parse(lines[2].Trim());
+                    budgetSpent = double.Parse(lines[2].Trim());
+                    budgetRemaining = double.Parse(lines[2].Trim());
+                    BudgetList.Add(new Budget(budgetAmount)
+                    {
+                        Filename = budgetFilename,
+                        Type = budgetType,
+                        BudgetLimit = budgetLimit,
+                        TotalBudget = budgetLimit,
+                        Month = month
+                    });
+                }
             }
 
-           
-
-            TransactionType getTransactionType(string value)
+            protected void InitializeTransactionsItems()
             {
-                if (value.CompareTo("Car")==0)
-                    return TransactionType.Car;
-                if (value.CompareTo("Entertainment") == 0)
-                    return TransactionType.Entertainment;
-                if (value.CompareTo("Food") == 0)
-                    return TransactionType.Food;
-                if (value.CompareTo("Misc") == 0)
-                    return TransactionType.Misc;
-                if (value.CompareTo("Shopping") == 0)
-                    return TransactionType.Shopping;
-                else
-                    return TransactionType.Rent;
+                var files = Directory.EnumerateFiles(Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData), "*.transaction.txt");
+                string allText;
+                string transactionFileName = "", transactionName = "";
+                double transactionAmount;
+                DateTime transactionDateTime;
+                string transactionMonth;
+                TransactionType transactionType;
+                string[] separator = new string[] { "\n" };
+                string[] lines;
+            
+                foreach (var filename in files)
+                {
+                    allText = File.ReadAllText(filename);
+                    lines = allText.Split(separator, StringSplitOptions.None);
+                    transactionFileName = lines[0];
+                    transactionAmount = double.Parse(lines[1]);
+                    transactionName = lines[2];
+                    transactionMonth = lines[3];
+                    transactionType = getTransactionType(lines[4]);
+                    transactionDateTime = DateTime.Today; // we have to convert this property from file
+                    TransactionsList.Add(new Transaction
+                    {
+                        Amount = transactionAmount,
+                        Date = transactionDateTime,
+                        Name = transactionName,
+                        Month = transactionMonth,
+                        Type = transactionType,
+                        FileName = transactionFileName
 
+                    });
+                }
             }
-            CarTransactionListView.ItemsSource= Transactions.Where(t => t.Type == TransactionType.Car).ToList();
-            EntertainmentTransactionListView.ItemsSource = Transactions.Where(t => t.Type == TransactionType.Entertainment).ToList();
-            FoodTransactionListView.ItemsSource= Transactions.Where(t => t.Type == TransactionType.Food).ToList();
-            MiscTransactionListView.ItemsSource= Transactions.Where(t => t.Type == TransactionType.Misc).ToList();
-            ShoppingTransactionListView.ItemsSource= Transactions.Where(t => t.Type == TransactionType.Shopping).ToList();
-            RentTransactionListView.ItemsSource = Transactions.Where(t => t.Type == TransactionType.Rent).ToList();
 
-            TotalsLabel.Text = "$" + totalSpend + "  |   $  XXXX";
+        TransactionType getTransactionType(string value)
+        {
+            if (value.CompareTo("Car") == 0)
+                return TransactionType.Car;
+            if (value.CompareTo("Entertainment") == 0)
+                return TransactionType.Entertainment;
+            if (value.CompareTo("Food") == 0)
+                return TransactionType.Food;
+            if (value.CompareTo("Misc") == 0)
+                return TransactionType.Misc;
+            if (value.CompareTo("Shopping") == 0)
+                return TransactionType.Shopping;
+            else
+                return TransactionType.Rent;
 
-            CarLabel.Text = "Car                      $" + TotalAmountByCategory["Car"];
-            EntertainmentLabel.Text = "Entertainment     $" + TotalAmountByCategory["Entertainment"];
-            FoodLabel.Text = "Food                     $" + TotalAmountByCategory["Food"];
-            MiscLabel.Text = "Misc                     $" + TotalAmountByCategory["Misc"];
-            ShoppingLabel.Text = "Shopping              $" + TotalAmountByCategory["Shopping"];
-            RentLabel.Text = "Rent                     $" + TotalAmountByCategory["Rent"];
+        }
+        private List<Budget> GetBudgetByMonth(string month)
+        {
+            List<Budget> filteredList = new List<Budget>();
+            filteredList = BudgetList.Where(b => b.Month.Equals(month)).ToList();
+            return filteredList;
         }
 
-        private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private List<Transaction> GetTransactionByMonth(string month)
+        {
+            List<Transaction> filteredList = new List<Transaction>();
+            filteredList = TransactionsList.Where(t => t.Month.Equals(month)).ToList();
+            return filteredList;
+        }
+
+
+        private void ReloadTransactionsByMonth()
+        {
+            var filteredBudgetListByMonth = GetBudgetByMonth(MonthTransactions);
+            var filteredTransactionsByMonth = GetTransactionByMonth(MonthTransactions);
+            //obtaining the total spend by month and category
+            TotalAmountSpendByCategory.Clear();
+            //insert categories
+            TotalAmountSpendByCategory.Add("Car", 0.00);
+            TotalAmountSpendByCategory.Add("Entertainment", 0.00);
+            TotalAmountSpendByCategory.Add("Food", 0.00);
+            TotalAmountSpendByCategory.Add("Misc", 0.00);
+            TotalAmountSpendByCategory.Add("Shopping", 0.00);
+            TotalAmountSpendByCategory.Add("Rent", 0.00);
+            TotalSpend = 0; TotalBudget = 0;
+
+            CarTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Car).ToList();
+            EntertainmentTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Entertainment).ToList();
+            FoodTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Food).ToList();
+            MiscTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Misc).ToList();
+            ShoppingTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Shopping).ToList();
+            RentTransactionListView.ItemsSource = filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Rent).ToList();
+            foreach(var t in filteredTransactionsByMonth){
+                TotalAmountSpendByCategory[t.Type.ToString()] = t.Amount+(double)TotalAmountSpendByCategory[t.Type.ToString()];
+                TotalSpend += t.Amount;}
+            foreach(var b in filteredBudgetListByMonth) { TotalBudget += b.TotalBudget; }
+
+            TotalsLabel.Text = String.Format("{0:C2}", TotalSpend) + "       |        " + String.Format("{0:C2}", TotalBudget - TotalSpend);
+
+            CarLabel.Text = "Car                      $" + TotalAmountSpendByCategory["Car"];
+            EntertainmentLabel.Text = "Entertainment             $" + TotalAmountSpendByCategory["Entertainment"];
+            FoodLabel.Text = "Food                     $" + TotalAmountSpendByCategory["Food"];
+            MiscLabel.Text = "Misc                     $" + TotalAmountSpendByCategory["Misc"];
+            ShoppingLabel.Text = "Shopping                 $" + TotalAmountSpendByCategory["Shopping"];
+            RentLabel.Text = "Rent                     $" + TotalAmountSpendByCategory["Rent"];
+        }
+    
+
+    private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
             {
@@ -123,6 +195,12 @@ namespace ExpenseTrackingApp.Pages
         {
             await Navigation.PushModalAsync(new AddTransaction { BindingContext = new Transaction()});
         }
-    
+
+        private void MonthPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MonthTransactions = MonthPicker.SelectedItem.ToString();
+            ReloadTransactionsByMonth();
+        }
+
     }
 }
