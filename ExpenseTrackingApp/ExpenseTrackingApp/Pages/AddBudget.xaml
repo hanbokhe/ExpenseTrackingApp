@@ -8,45 +8,76 @@
              mc:Ignorable="d">
 
     <ContentPage.Content>
-    <StackLayout>
-            <Editor x:Name="TotalBudget"
-                    Placeholder="Enter Budget Amount"
-                    HeightRequest="50"/>
+        <StackLayout Margin="20,20,20,0">
+            <Label Text="Edit Budget" FontSize="20"/>
+            <Picker Grid.Column="0" x:Name="MonthPicker" Title ="Month" HorizontalOptions="FillAndExpand">
+                <Picker.Items>
+                    <x:String>January</x:String>
+                    <x:String>Feburary</x:String>
+                    <x:String>March</x:String>
+                    <x:String>April</x:String>
+                    <x:String>May</x:String>
+                    <x:String>June</x:String>
+                    <x:String>July</x:String>
+                    <x:String>August</x:String>
+                    <x:String>September</x:String>
+                    <x:String>October</x:String>
+                    <x:String>November</x:String>
+                    <x:String>December</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label Text="{Binding TotalMonthBudget}"/>
 
-        <Picker x:Name="BudgetType" Title ="Choose Budget Type" HorizontalOptions="FillAndExpand">
-            <Picker.Items>
-                <x:String>Car</x:String>
-                <x:String>Entertainment</x:String>
-                <x:String>Food</x:String>
-                <x:String>Misc</x:String>
-                <x:String>Shopping</x:String>
-                <x:String>Rent</x:String>
-            </Picker.Items>
-        </Picker>
+            <Label Text="Car Budget" FontSize="14"/>
+            <Editor
+                x:Name="CarBudget"
+                Placeholder="Enter Car Budget"
+                Text="{Binding CarBudget}"
+                HeightRequest="50"/>
 
-        <Picker x:Name="BudgetMonth" Title ="Choose Budget Month" HorizontalOptions="FillAndExpand">
-            <Picker.Items>
-                <x:String>January</x:String>
-                <x:String>Feburary</x:String>
-                <x:String>March</x:String>
-                <x:String>April</x:String>
-                <x:String>May</x:String>
-                <x:String>June</x:String>
-                <x:String>July</x:String>
-                <x:String>August</x:String>
-                <x:String>September</x:String>
-                <x:String>October</x:String>
-                <x:String>November</x:String>
-                <x:String>December</x:String>
-            </Picker.Items>
-        </Picker>
-        <Grid>
+            <Label Text="Entertainment Budget" FontSize="14"/>
+            <Editor
+                x:Name="EntertainmentBudget"
+                Placeholder="Enter Entertainment Budget"
+                Text="{Binding EntertainmentBudget}"
+                HeightRequest="50"/>
+
+            <Label Text="Food Budget" FontSize="14"/>
+            <Editor
+                x:Name="FoodBudget"
+                Placeholder="Enter Food Budget"
+                Text="{Binding FoodBudget}"
+                HeightRequest="50"/>
+
+            <Label Text="Miscellaneous Budget" FontSize="14"/>
+            <Editor
+                x:Name="MiscBudget"
+                Placeholder="Enter Miscellaneous Budget"
+                Text="{Binding MiscBudget}"
+                HeightRequest="50"/>
+
+            <Label Text="Shopping Budget" FontSize="14"/>
+            <Editor
+                x:Name="ShoppingBudget"
+                Placeholder="Enter Shopping Budget"
+                Text="{Binding ShoppingBudget}"
+                HeightRequest="50"/>
+
+            <Label Text="Rent Budget" FontSize="14"/>
+            <Editor
+                x:Name="RentBudget"
+                Placeholder="Enter Rent Budget"
+                Text="{Binding RentBudget}"
+                HeightRequest="50"/>
+
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Text="Save" Clicked="OnSaveButton_Clicked"/>
                 <Button Text="Delete" Grid.Column="1" Clicked="OnDeleteButton_Clicked"/>
+
             </Grid>
         </StackLayout>
     </ContentPage.Content>
