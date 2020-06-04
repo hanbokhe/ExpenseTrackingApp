@@ -25,11 +25,11 @@
                 
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" />
 
             </Grid.ColumnDefinitions>
-                <Picker Grid.Column="0"  HorizontalOptions="StartAndExpand" x:Name="MonthPicker" Title ="Month"   Margin="0,0,0,0" SelectedIndexChanged="MonthPicker_SelectedIndexChanged">
+            <Picker Grid.Column="0"  HorizontalOptions="StartAndExpand" x:Name="MonthPicker" Title ="Month" WidthRequest="400" Margin="20,0,0,0" SelectedIndexChanged="MonthPicker_SelectedIndexChanged">
                     <Picker.Items>
                         <x:String>January</x:String>
                         <x:String>Feburary</x:String>
