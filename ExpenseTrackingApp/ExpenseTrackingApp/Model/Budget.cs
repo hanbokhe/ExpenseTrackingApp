@@ -70,7 +70,7 @@ namespace ExpenseTrackingApp.Model
 
         public Budget(double budgetLimit)
         {
-            if (budgetLimit <= 0)
+            if (budgetLimit < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(budgetLimit), "Enter a larger budget");
             }
@@ -79,7 +79,7 @@ namespace ExpenseTrackingApp.Model
 
         public void Spent(double amount, DateTime date, string month, TransactionType type, string name)
         {
-            if (amount <= 0)
+            if (amount < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(amount), "Enter a positive number");
             }
@@ -89,7 +89,7 @@ namespace ExpenseTrackingApp.Model
         }
         public void Save(double amount, DateTime date, string month, TransactionType type, string name)
         {
-            if (amount <= 0)
+            if (amount < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(amount), "Enter a positive number");
             }
