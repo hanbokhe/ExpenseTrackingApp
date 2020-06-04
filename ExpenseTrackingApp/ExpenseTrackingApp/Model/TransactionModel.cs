@@ -9,7 +9,7 @@ namespace ExpenseTrackingApp.Model
     {
 		public string Name { get; set; }
 		public string Amount { get; set; }
-		public string DateTransaction { get; set; }	
+		public string FileName { get; set; }
 		public TransactionModel()
 			{
 			}
@@ -17,7 +17,8 @@ namespace ExpenseTrackingApp.Model
 
 		public class GroupedTransactionModel : ObservableCollection<TransactionModel>
 		{
-			public string LongName { get; set; }
-			public string ShortName { get; set; }
+			public string CategoryName { get; set; }
+			public string CategoryInitial { get; set; }
+		    public string AmountByCategory { get; set; }
 		}
 }

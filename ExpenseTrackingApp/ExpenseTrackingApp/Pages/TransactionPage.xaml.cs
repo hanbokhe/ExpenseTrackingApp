@@ -159,44 +159,50 @@ namespace ExpenseTrackingApp.Pages
             TotalAmountSpendByCategory.Add("Shopping", 0.00);
             TotalAmountSpendByCategory.Add("Rent", 0.00);
             TotalSpend = 0; TotalBudget = 0;
-            var carGroup = new GroupedTransactionModel() { LongName = "Car     "+ 
-                String.Format("{0:C2}", TotalAmountSpendByCategory["Car"]), ShortName = "C" };
-            var entertainmentGroup = new GroupedTransactionModel() { LongName = "Entertainment        "+
-                String.Format("{0:C2}", TotalAmountSpendByCategory["Entertainment"]),ShortName = "E" };
-            var foodGroup = new GroupedTransactionModel() { LongName = "Food        "+
-                String.Format("{0:C2}", TotalAmountSpendByCategory["Food"]), ShortName = "F" };
-            var miscGroup = new GroupedTransactionModel() { LongName = "Misc      "+
-                String.Format("{0:C2}", TotalAmountSpendByCategory["Misc"]), ShortName = "M" };
-            var shoppingGroup = new GroupedTransactionModel() { LongName = "Shopping      "+
-                String.Format("{0:C2}", TotalAmountSpendByCategory["Shopping"]), ShortName = "S" };
-            var rentGroup = new GroupedTransactionModel() { LongName = "Rent       "+
-                String.Format("{0:C2}", TotalAmountSpendByCategory["Rent"]), ShortName = "R" };
-            
+            var carGroup = new GroupedTransactionModel() { CategoryName = "CAR", CategoryInitial = "C" };
+            var entertainmentGroup = new GroupedTransactionModel() { CategoryName = "ENTERTAINMENT",CategoryInitial = "E" };
+            var foodGroup = new GroupedTransactionModel() { CategoryName = "FOOD", CategoryInitial = "F" };
+            var miscGroup = new GroupedTransactionModel() { CategoryName = "MISC", CategoryInitial = "M" };
+            var shoppingGroup = new GroupedTransactionModel() { CategoryName = "SHOPPING", CategoryInitial = "S" };
+            var rentGroup = new GroupedTransactionModel() { CategoryName = "RENT", CategoryInitial = "R" }; 
             foreach(var c in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Car).ToList())
             {
-                carGroup.Add(new TransactionModel() { Name = c.Name, Amount = c.Amount.ToString(), DateTransaction = c.Date.ToString() });
+                carGroup.Add(new TransactionModel() { Name = c.Name, Amount = c.Date.ToShortDateString() + "   " + String.Format("{0:C2}",c.Amount), FileName=c.FileName});
+                TotalAmountSpendByCategory["Car"] = (double)TotalAmountSpendByCategory["Car"] + c.Amount;
             }
             foreach (var e in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Entertainment).ToList())
             {
-                entertainmentGroup.Add(new TransactionModel() { Name = e.Name, Amount = e.Amount.ToString(), DateTransaction = e.Date.ToString() });
+                entertainmentGroup.Add(new TransactionModel() { Name = e.Name, Amount = e.Date.ToShortDateString() + "   " + String.Format("{0:C2}", e.Amount), FileName = e.FileName });
+                TotalAmountSpendByCategory["Entertainment"] = (double)TotalAmountSpendByCategory["Entertainment"] + e.Amount;
             }
             foreach (var f in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Food).ToList())
             {
-                foodGroup.Add(new TransactionModel() { Name = f.Name, Amount = f.Amount.ToString(), DateTransaction = f.Date.ToString() });
+                foodGroup.Add(new TransactionModel() { Name = f.Name, Amount = f.Date.ToShortDateString() + "   " + String.Format("{0:C2}", f.Amount), FileName = f.FileName });
+                TotalAmountSpendByCategory["Food"] = (double)TotalAmountSpendByCategory["Food"] +f.Amount;
             }
             foreach (var m in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Misc).ToList())
             {
-                miscGroup.Add(new TransactionModel() { Name = m.Name, Amount = m.Amount.ToString(), DateTransaction = m.Date.ToString() });
+                miscGroup.Add(new TransactionModel() { Name = m.Name, Amount = m.Date.ToShortDateString() + "   " + String.Format("{0:C2}", m.Amount), FileName = m.FileName });
+                TotalAmountSpendByCategory["Misc"] = (double)TotalAmountSpendByCategory["Misc"] + m.Amount;
             }
             foreach (var s in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Shopping).ToList())
             {
-                shoppingGroup.Add(new TransactionModel() { Name = s.Name, Amount = s.Amount.ToString(), DateTransaction = s.Date.ToString() });
+                shoppingGroup.Add(new TransactionModel() { Name = s.Name, Amount = s.Date.ToShortDateString() + "   " + String.Format("{0:C2}", s.Amount), FileName = s.FileName });
+                TotalAmountSpendByCategory["Shopping"] = (double)TotalAmountSpendByCategory["Shopping"] + s.Amount;
             }
             foreach (var r in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Rent).ToList())
             {
-                rentGroup.Add(new TransactionModel() { Name = r.Name, Amount = r.Amount.ToString(), DateTransaction = r.Date.ToString() });
+                rentGroup.Add(new TransactionModel() { Name = r.Name, Amount = r.Date.ToShortDateString() + "   " + String.Format("{0:C2}", r.Amount), FileName = r.FileName });
+                TotalAmountSpendByCategory["Rent"] = (double)TotalAmountSpendByCategory["Rent"] + r.Amount;
             }
             GroupedTransactions.Clear();
+            carGroup.AmountByCategory = "CAR                " + String.Format("{0:C2}", TotalAmountSpendByCategory["Car"]);
+            entertainmentGroup.AmountByCategory = "ENTERTAINMENT      " + String.Format("{0:C2}", TotalAmountSpendByCategory["Entertainment"]);
+            foodGroup.AmountByCategory = "FOOD               " + String.Format("{0:C2}", TotalAmountSpendByCategory["Food"]);
+            miscGroup.AmountByCategory = "MISC               " + String.Format("{0:C2}", TotalAmountSpendByCategory["Misc"]);
+            shoppingGroup.AmountByCategory = "SHOPPING           " + String.Format("{0:C2}", TotalAmountSpendByCategory["Shopping"]);
+            rentGroup.AmountByCategory = "RENT               " + String.Format("{0:C2}", TotalAmountSpendByCategory["Rent"]);
+
             GroupedTransactions.Add(carGroup);
             GroupedTransactions.Add(entertainmentGroup);
             GroupedTransactions.Add(foodGroup);
@@ -218,10 +224,23 @@ namespace ExpenseTrackingApp.Pages
         {
             if (e.SelectedItem != null)
             {
+                TransactionModel mt = (TransactionModel)e.SelectedItem;
+                string allText = File.ReadAllText(mt.FileName);
+                string[] separator = new string[] { "\n" };
+                string[] lines = allText.Split(separator, StringSplitOptions.None);
+                Transaction currentTransaction = new Transaction
+                {
+                    Amount = double.Parse(lines[1]),
+                    Date = DateTime.Today,
+                    Name = lines[2],
+                    Month = lines[3],
+                    Type = getTransactionType(lines[4]),
+                    FileName = lines[0]
+                };
                 await Navigation.PushModalAsync(new TransactionDetailPage
                 {
-                    BindingContext = (Transaction)e.SelectedItem
-                });
+                    BindingContext = currentTransaction
+                }) ;
             }
         }
 
