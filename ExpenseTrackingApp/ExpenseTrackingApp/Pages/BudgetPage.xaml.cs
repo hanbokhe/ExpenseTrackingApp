@@ -87,6 +87,7 @@ namespace ExpenseTrackingApp.Pages
             TransactionType transactionType;
             string[] separator = new string[] { "\n" };
             string[] lines;
+            TransactionsList.Clear();
             foreach (var filename in files)
             {
                 allText = File.ReadAllText(filename);
