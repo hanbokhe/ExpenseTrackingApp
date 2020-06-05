@@ -167,32 +167,32 @@ namespace ExpenseTrackingApp.Pages
             var rentGroup = new GroupedTransactionModel() { CategoryName = "RENT", CategoryInitial = "R" }; 
             foreach(var c in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Car).ToList())
             {
-                carGroup.Add(new TransactionModel() { Name = c.Name, Amount = c.Date.ToShortDateString() + "   " + String.Format("{0:C2}",c.Amount), FileName=c.FileName});
+                carGroup.Add(new TransactionModel() { Name = c.Date.ToShortDateString() + "   " + c.Name, Amount = String.Format("{0:C2}",c.Amount), FileName=c.FileName});
                 TotalAmountSpendByCategory["Car"] = (double)TotalAmountSpendByCategory["Car"] + c.Amount;
             }
             foreach (var e in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Entertainment).ToList())
             {
-                entertainmentGroup.Add(new TransactionModel() { Name = e.Name, Amount = e.Date.ToShortDateString() + "   " + String.Format("{0:C2}", e.Amount), FileName = e.FileName });
+                entertainmentGroup.Add(new TransactionModel() { Name = e.Date.ToShortDateString() + "   " + e.Name, Amount = String.Format("{0:C2}", e.Amount), FileName = e.FileName });
                 TotalAmountSpendByCategory["Entertainment"] = (double)TotalAmountSpendByCategory["Entertainment"] + e.Amount;
             }
             foreach (var f in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Food).ToList())
             {
-                foodGroup.Add(new TransactionModel() { Name = f.Name, Amount = f.Date.ToShortDateString() + "   " + String.Format("{0:C2}", f.Amount), FileName = f.FileName });
+                foodGroup.Add(new TransactionModel() { Name = f.Date.ToShortDateString() + "   " + f.Name, Amount = String.Format("{0:C2}", f.Amount), FileName = f.FileName });
                 TotalAmountSpendByCategory["Food"] = (double)TotalAmountSpendByCategory["Food"] +f.Amount;
             }
             foreach (var m in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Misc).ToList())
             {
-                miscGroup.Add(new TransactionModel() { Name = m.Name, Amount = m.Date.ToShortDateString() + "   " + String.Format("{0:C2}", m.Amount), FileName = m.FileName });
+                miscGroup.Add(new TransactionModel() { Name = m.Date.ToShortDateString() + "   " + m.Name, Amount =  String.Format("{0:C2}", m.Amount), FileName = m.FileName });
                 TotalAmountSpendByCategory["Misc"] = (double)TotalAmountSpendByCategory["Misc"] + m.Amount;
             }
             foreach (var s in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Shopping).ToList())
             {
-                shoppingGroup.Add(new TransactionModel() { Name = s.Name, Amount = s.Date.ToShortDateString() + "   " + String.Format("{0:C2}", s.Amount), FileName = s.FileName });
+                shoppingGroup.Add(new TransactionModel() { Name = s.Date.ToShortDateString() + "   " + s.Name, Amount = String.Format("{0:C2}", s.Amount), FileName = s.FileName });
                 TotalAmountSpendByCategory["Shopping"] = (double)TotalAmountSpendByCategory["Shopping"] + s.Amount;
             }
             foreach (var r in filteredTransactionsByMonth.Where(t => t.Type == TransactionType.Rent).ToList())
             {
-                rentGroup.Add(new TransactionModel() { Name = r.Name, Amount = r.Date.ToShortDateString() + "   " + String.Format("{0:C2}", r.Amount), FileName = r.FileName });
+                rentGroup.Add(new TransactionModel() { Name = r.Date.ToShortDateString() + "   " + r.Name, Amount = String.Format("{0:C2}", r.Amount), FileName = r.FileName });
                 TotalAmountSpendByCategory["Rent"] = (double)TotalAmountSpendByCategory["Rent"] + r.Amount;
             }
             GroupedTransactions.Clear();
