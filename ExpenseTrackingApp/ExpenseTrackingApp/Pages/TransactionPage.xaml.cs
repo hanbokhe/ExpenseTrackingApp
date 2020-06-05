@@ -196,12 +196,12 @@ namespace ExpenseTrackingApp.Pages
                 TotalAmountSpendByCategory["Rent"] = (double)TotalAmountSpendByCategory["Rent"] + r.Amount;
             }
             GroupedTransactions.Clear();
-            carGroup.AmountByCategory = "CAR                " + String.Format("{0:C2}", TotalAmountSpendByCategory["Car"]);
-            entertainmentGroup.AmountByCategory = "ENTERTAINMENT      " + String.Format("{0:C2}", TotalAmountSpendByCategory["Entertainment"]);
-            foodGroup.AmountByCategory = "FOOD               " + String.Format("{0:C2}", TotalAmountSpendByCategory["Food"]);
-            miscGroup.AmountByCategory = "MISC               " + String.Format("{0:C2}", TotalAmountSpendByCategory["Misc"]);
-            shoppingGroup.AmountByCategory = "SHOPPING           " + String.Format("{0:C2}", TotalAmountSpendByCategory["Shopping"]);
-            rentGroup.AmountByCategory = "RENT               " + String.Format("{0:C2}", TotalAmountSpendByCategory["Rent"]);
+            carGroup.AmountByCategory = "CAR                                                                                      " + String.Format("{0:C2}", TotalAmountSpendByCategory["Car"]);
+            entertainmentGroup.AmountByCategory = "ENTERTAINMENT                                                              " + String.Format("{0:C2}", TotalAmountSpendByCategory["Entertainment"]);
+            foodGroup.AmountByCategory = "FOOD                                                                                    " + String.Format("{0:C2}", TotalAmountSpendByCategory["Food"]);
+            miscGroup.AmountByCategory = "MISC                                                                                     " + String.Format("{0:C2}", TotalAmountSpendByCategory["Misc"]);
+            shoppingGroup.AmountByCategory = "SHOPPING                                                                           " + String.Format("{0:C2}", TotalAmountSpendByCategory["Shopping"]);
+            rentGroup.AmountByCategory = "RENT                                                                                     " + String.Format("{0:C2}", TotalAmountSpendByCategory["Rent"]);
 
             GroupedTransactions.Add(carGroup);
             GroupedTransactions.Add(entertainmentGroup);
@@ -216,7 +216,7 @@ namespace ExpenseTrackingApp.Pages
                 TotalSpend += t.Amount;}
             foreach(var b in filteredBudgetListByMonth) { TotalBudget += b.TotalBudget; }
 
-            TotalsLabel.Text = String.Format("{0:C2}", TotalSpend) + "       |        " + String.Format("{0:C2}", TotalBudget - TotalSpend);
+            TotalsLabel.Text = String.Format("{0:C2}", TotalSpend) + "     |     " + String.Format("{0:C2}", TotalBudget - TotalSpend);
         }
     
 

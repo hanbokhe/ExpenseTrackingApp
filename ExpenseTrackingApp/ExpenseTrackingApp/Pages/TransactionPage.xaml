@@ -48,14 +48,23 @@
                 <Button Grid.Column="1" Text="Add" Margin="0,0,5,0" HorizontalOptions="End"  Clicked="AddTransactionButton_Clicked"/>
             </Grid>
             
-            <Label x:Name="TotalsLabel" Grid.Row="1"  Text="" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" FontSize="Title"/>
-            <Label Text="Total:    SPEND      REMAINING" Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body" FontAttributes="Bold"/>
+            <Label x:Name="TotalsLabel" Grid.Row="1"  Text="" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" FontSize="Title" FontAttributes="Bold"/>
+            <Label Text="SPENT      REMAINING" Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Body" FontAttributes="Bold"/>
 
         <ListView x:Name ="lstView" IsGroupingEnabled="true" GroupDisplayBinding="{Binding AmountByCategory}" 
                    GroupShortNameBinding="{Binding ShortName}" ItemSelected="OnListViewItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail = "{Binding  Amount}"/>
+                    <ViewCell>
+
+                            <StackLayout Orientation="Horizontal" HeightRequest="20" Margin="50,0,25,0">
+                                <Label Text="{Binding Name}"
+                                 FontSize="15" HorizontalOptions ="Start" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="{Binding Amount}"
+                                FontSize="15" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+                            </StackLayout>
+
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

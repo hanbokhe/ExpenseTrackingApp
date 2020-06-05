@@ -161,8 +161,8 @@ namespace ExpenseTrackingApp.Pages
             var budgetSpent = (float)BudgetManager.GetBudgetSpent(monthBudget);
 
             var entries = new List<Entry>();
-            entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.Blue.ToHex()) });
-            entries.Add(new Entry(budgetRemaining) { Color = SKColor.Parse(Color.Green.ToHex()) });
+            entries.Add(new Entry(budgetSpent) { Color = SKColor.Parse(Color.SkyBlue.ToHex()) });
+            entries.Add(new Entry(budgetRemaining) { Color = SKColor.Parse(Color.DarkSeaGreen.ToHex()) });
             BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
 
             lblRemaining.Text = $"Remaining = ${budgetRemaining}";
@@ -204,7 +204,7 @@ namespace ExpenseTrackingApp.Pages
             }
             this.BudgetItems.Add(new BudgetItem
             {
-                TransactionType = "Total",
+                TransactionType = "Total Budget",
                 AmountBudget = totalBudget,
                 AmountSpent=0,
                 Month = MonthBudget
@@ -222,8 +222,8 @@ namespace ExpenseTrackingApp.Pages
             lblRemaining.Text = "Remaining  "+ String.Format("{0:C2}", remaining);
 
             var entries = new List<Entry>();
-            entries.Add(new Entry(spent) { Color = SKColor.Parse(Color.Blue.ToHex() )});
-            entries.Add(new Entry(remaining) { Color = SKColor.Parse(Color.Green.ToHex()) });
+            entries.Add(new Entry(spent) { Color = SKColor.Parse(Color.SkyBlue.ToHex() )});
+            entries.Add(new Entry(remaining) { Color = SKColor.Parse(Color.LightGreen.ToHex()) });
             BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
         }
     }

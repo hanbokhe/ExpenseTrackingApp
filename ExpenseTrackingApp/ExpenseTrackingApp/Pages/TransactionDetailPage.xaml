@@ -8,19 +8,32 @@
              x:Class="ExpenseTrackingApp.Pages.TransactionDetailPage">
     <ContentPage.Content>
         
-        <StackLayout>
-            <Label Text="{Binding Name}" />
-            <Label Text="{Binding Amount}"/>
-            <Label Text="{Binding Month}"/>
-            <Label Text="{Binding Type}"/>
-            <Label Text="{Binding FileName}"/>
-                <Grid>
+        <StackLayout Margin="20,10,20,0">
+            <Label Text="Transaction Details" FontSize="20" Margin="0,0,0,10" FontAttributes="Bold"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Description: " FontSize="Medium" />
+                <Label Text= "{Binding Name}" FontSize="Medium"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Amount: $" FontSize="Medium" />
+                <Label Text= "{Binding Amount}" FontSize="Medium"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Month: " FontSize="Medium" />
+                <Label Text= "{Binding Month}" FontSize="Medium"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Category: " FontSize="Medium" />
+                <Label Text= "{Binding Type}" FontSize="Medium"/>
+            </StackLayout>
+
+                <Grid VerticalOptions="EndAndExpand" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Text="Back" Grid.Column="0" Clicked="BackButton_Clicked" />
-                    <Button Text="Delete" BackgroundColor="red" TextColor="White" Grid.Column="1" Clicked="OnDeleteButton_Clicked" />
+                    <Button Text="Back" Grid.Column="0" BackgroundColor="LightBlue" Clicked="BackButton_Clicked" />
+                    <Button Text="Delete" Grid.Column="1" BackgroundColor="LightCoral" TextColor="White" Clicked="OnDeleteButton_Clicked" />
                 </Grid>
            
         </StackLayout>

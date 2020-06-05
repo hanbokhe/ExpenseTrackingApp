@@ -8,8 +8,8 @@
              mc:Ignorable="d">
 
     <ContentPage.Content>
-        <StackLayout Margin="20,20,20,0">
-            <Label Text="Edit Budget" FontSize="20"/>
+        <StackLayout Margin="20,10,20,0">
+            <Label Text="Edit Budget" FontSize="20" FontAttributes="Bold"/>
             <Picker Grid.Column="0" x:Name="MonthPicker" Title ="Month" HorizontalOptions="FillAndExpand">
                 <Picker.Items>
                     <x:String>January</x:String>
@@ -70,13 +70,13 @@
                 Text="{Binding RentBudget}"
                 HeightRequest="50"/>
 
-            <Grid>
+            <Grid Margin="0,0,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Text="Save" Clicked="OnSaveButton_Clicked"/>
-                <Button Text="Delete" Grid.Column="1" Clicked="OnDeleteButton_Clicked"/>
+                <Button Text="Save" BackgroundColor="LightBlue" Clicked="OnSaveButton_Clicked"/>
+                <Button Text="Cancel" Grid.Column="1" BackgroundColor="LightCoral" TextColor="White" Clicked="OnDeleteButton_Clicked"/>
 
             </Grid>
         </StackLayout>

@@ -55,13 +55,13 @@
         <forms:ChartView Grid.Row="1" x:Name="BudgetChart" HeightRequest="150"></forms:ChartView>
         
         <StackLayout Grid.Row="2" Orientation="Horizontal">
-            <Grid>
+            <Grid Margin="20,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" x:Name="lblSpent" HorizontalTextAlignment="Start" TextColor="Blue"/>
-                <Label Grid.Column="1" x:Name="lblRemaining" HorizontalTextAlignment="Center" TextColor="Green"/>
+                <Label Grid.Column="1" x:Name="lblSpent" HorizontalTextAlignment="Center" TextColor="SteelBlue"/>
+                <Label Grid.Column="0" x:Name="lblRemaining" HorizontalTextAlignment="Center" TextColor="MediumSeaGreen"/>
             </Grid>
         </StackLayout>
         <view:AlternatingListView Grid.Row="3" x:Name="BudgetItemsView" HasUnevenRows="True">

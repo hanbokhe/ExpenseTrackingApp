@@ -41,11 +41,6 @@ namespace ExpenseTrackingApp.Pages
                 var TotalAmount = carAmount + entertainmentAmount + foodAmount + miscAmount + shoppingAmount + rentAmount;
 
                 double amount;
-                double amount1;
-                double amount2;
-                double amount3;
-                double amount4;
-                double amount5;
 
                 if (MonthPicker.SelectedIndex == -1)
                 {
@@ -54,13 +49,12 @@ namespace ExpenseTrackingApp.Pages
 
                 if (TotalAmount <= 0 
                     || !Double.TryParse(CarBudget.Text, out amount) 
-                    || !Double.TryParse(EntertainmentBudget.Text, out amount1)
-                    || !Double.TryParse(FoodBudget.Text, out amount2)
-                    || !Double.TryParse(MiscBudget.Text, out amount3)
-                    || !Double.TryParse(ShoppingBudget.Text, out amount4)
-                    || !Double.TryParse(RentBudget.Text, out amount5)) //if is not a number we show an alert
+                    || !Double.TryParse(EntertainmentBudget.Text, out amount)
+                    || !Double.TryParse(FoodBudget.Text, out amount)
+                    || !Double.TryParse(MiscBudget.Text, out amount)
+                    || !Double.TryParse(ShoppingBudget.Text, out amount)
+                    || !Double.TryParse(RentBudget.Text, out amount)) //if is not a number we show an alert
                 {
-                    
                     await DisplayAlert("Alert", "Please enter a valid number", "OK");
                 }
                 else

@@ -18,7 +18,7 @@ namespace ExpenseTrackingApp.View
             base.SetupContent(content, index);
 
             var viewCell = content as ViewCell;
-            viewCell.View.BackgroundColor = index % 2 == 0 ? Color.White : Color.CadetBlue;
+            viewCell.View.BackgroundColor = index % 2 == 0 ? Color.White : Color.WhiteSmoke;
         }
     }
 }

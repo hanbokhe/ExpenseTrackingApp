@@ -9,18 +9,18 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <StackLayout Margin="20,20,20,0">
-                <Label Text="Add Transaction" FontSize="20"/>
+            <StackLayout Margin="20,10,20,0">
+                <Label Text="Add Transaction" FontSize="20" FontAttributes="Bold"/>
                 <Editor x:Name="TransactionAmount"
-                    Placeholder="Enter Transaction Amount"
+                    Placeholder="Enter Amount"
                     Text="{Binding Text}"
                     HeightRequest="50"/>
                 <Editor x:Name="TransactionDescription"
-                    Placeholder="Enter Transaction Description"
+                    Placeholder="Enter Description"
                     Text="{Binding Description}"
                     HeightRequest="50"/>
 
-                <Picker x:Name="TransactionType" Title ="Choose Transaction Type" HorizontalOptions="FillAndExpand">
+                <Picker x:Name="TransactionType" Title ="Choose Category" HorizontalOptions="FillAndExpand">
                     <Picker.Items>
                         <x:String>Car</x:String>
                         <x:String>Entertainment</x:String>
@@ -31,7 +31,7 @@
                     </Picker.Items>
                 </Picker>
 
-                <Picker x:Name="TransactionMonth" Title ="Choose Budget Month" HorizontalOptions="FillAndExpand">
+                <Picker x:Name="TransactionMonth" Title ="Choose Month" HorizontalOptions="FillAndExpand">
                     <Picker.Items>
                         <x:String>January</x:String>
                         <x:String>Feburary</x:String>
@@ -47,15 +47,16 @@
                         <x:String>December</x:String>
                     </Picker.Items>
                 </Picker>
-                <Grid>
+
+
+
+                <Grid VerticalOptions="EndAndExpand" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Text="Save" Clicked="OnSaveButton_Clicked"/>
-                    <!--Can't delete because there is no reference to transaction. Delete is on Detail Transaction page-->
-
-                    <Button Text="Back" Grid.Column="1" Clicked="OnBackButton_Clicked"/>
+                    <Button Text="Save" Grid.Column="0" BackgroundColor="LightBlue" Clicked="OnSaveButton_Clicked"/>
+                    <Button Text="Cancel" Grid.Column="1" BackgroundColor="LightCoral" TextColor="White" Clicked="OnBackButton_Clicked"/>
                 </Grid>
             </StackLayout>
         </StackLayout>
