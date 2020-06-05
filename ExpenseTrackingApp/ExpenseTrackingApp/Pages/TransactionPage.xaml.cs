@@ -255,5 +255,21 @@ namespace ExpenseTrackingApp.Pages
             ReloadTransactionsByMonth();
         }
 
+        private void DeleteAllTransAndBudget_Clicked(object sender, EventArgs e)
+        {
+            var filesTransactions = Directory.EnumerateFiles(Environment.GetFolderPath(
+                   Environment.SpecialFolder.LocalApplicationData), "*.transaction.txt");
+            foreach(var file in filesTransactions)
+            {
+                File.Delete(file);
+            }
+            var filesBudget = Directory.EnumerateFiles(Environment.GetFolderPath(
+                   Environment.SpecialFolder.LocalApplicationData), "*.budget.txt");
+            foreach (var file in filesBudget)
+            {
+                File.Delete(file);
+            }
+        }
+
     }
 }
