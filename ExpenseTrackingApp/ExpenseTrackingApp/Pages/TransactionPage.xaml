@@ -57,11 +57,11 @@
                 <DataTemplate>
                     <ViewCell>
 
-                            <StackLayout Orientation="Horizontal" HeightRequest="20" Margin="50,0,25,0" >
+                            <StackLayout Orientation="Horizontal" HeightRequest="20" BackgroundColor="WhiteSmoke">
                                 <Label Text="{Binding Name}"
-                                 FontSize="15" HorizontalOptions ="Start" VerticalOptions="CenterAndExpand" />
+                                 FontSize="15" Margin="20,0,0,0" HorizontalOptions ="Start" VerticalOptions="CenterAndExpand" />
                                 <Label Text="{Binding Amount}"
-                                FontSize="15" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                                FontSize="15" Margin="0,0,35,0" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
                             </StackLayout>
 
                     </ViewCell>

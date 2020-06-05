@@ -60,8 +60,8 @@
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" x:Name="lblSpent" HorizontalTextAlignment="Start" TextColor="SteelBlue"/>
-                <Label Grid.Column="1" x:Name="lblRemaining" HorizontalTextAlignment="Center" TextColor="MediumSeaGreen"/>
+                <Label Grid.Column="0" x:Name="lblSpent" HorizontalOptions="Center" TextColor="SteelBlue"/>
+                <Label Grid.Column="1" x:Name="lblRemaining" HorizontalOptions="Center" TextColor="MediumSeaGreen" />
             </Grid>
         </StackLayout>
         <view:AlternatingListView Grid.Row="3" x:Name="BudgetItemsView" HasUnevenRows="True">
@@ -76,8 +76,14 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding TransactionType}" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                            <Label Text="{Binding AmountBudget}" Grid.Column="1" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <StackLayout Orientation="Horizontal" Grid.Column="0" Margin="25,0,0,0"  HorizontalOptions="StartAndExpand">
+                                <Label Text="{Binding TransactionType}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                                <Label Text="Budget" FontSize ="Medium"  VerticalTextAlignment="Center" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Grid.Column="1" HorizontalOptions="Center">
+                                <Label Text="$" FontSize ="Medium"  VerticalTextAlignment="Center" />
+                                <Label Text="{Binding AmountBudget}"  FontSize="Medium"  VerticalTextAlignment="Center"/>
+                            </StackLayout>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

@@ -218,12 +218,12 @@ namespace ExpenseTrackingApp.Pages
             TotalTransactions = totalTransactions;
             var spent = Convert.ToInt32(totalTransactions);
             var remaining = Convert.ToInt32(totalBudget - totalTransactions);
-            lblSpent.Text = "  Spent "+ String.Format("{0:C2}", spent);
-            lblRemaining.Text = "Remaining  "+ String.Format("{0:C2}", remaining);
+            lblSpent.Text = "Spent "+ String.Format("{0:C2}", spent);
+            lblRemaining.Text = "Remaining "+ String.Format("{0:C2}", remaining);
 
             var entries = new List<Entry>();
-            entries.Add(new Entry(spent) { Color = SKColor.Parse(Color.SteelBlue.ToHex() )});
-            entries.Add(new Entry(remaining) { Color = SKColor.Parse(Color.MediumSeaGreen.ToHex()) });
+            entries.Add(new Entry(spent) { Color = SKColor.Parse(Color.SkyBlue.ToHex() )});
+            entries.Add(new Entry(remaining) { Color = SKColor.Parse(Color.LightGreen.ToHex()) });
             BudgetChart.Chart = new Microcharts.DonutChart { Entries = entries };
         }
     }
