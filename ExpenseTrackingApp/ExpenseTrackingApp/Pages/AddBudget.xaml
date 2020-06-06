@@ -10,7 +10,8 @@
     <ContentPage.Content>
         <StackLayout Margin="20,10,20,0">
             <Label Text="Edit Budget" FontSize="20" FontAttributes="Bold"/>
-            <Picker Grid.Column="0" x:Name="MonthPicker" Title ="Month" HorizontalOptions="FillAndExpand">
+            <Label x:Name="MonthLabel" Text="" FontSize="20"/>
+            <!--<Picker Grid.Column="0" x:Name="MonthPicker" Title ="Month" HorizontalOptions="FillAndExpand">--><!--SelectedIndexChanged="MonthPicker_SelectedIndexChanged">--><!--
                 <Picker.Items>
                     <x:String>January</x:String>
                     <x:String>Feburary</x:String>
@@ -25,49 +26,49 @@
                     <x:String>November</x:String>
                     <x:String>December</x:String>
                 </Picker.Items>
-            </Picker>
-            <Label Text="{Binding TotalMonthBudget}"/>
+            </Picker>-->
+            <Label Text=""/>
 
             <Label Text="Car Budget" FontSize="14"/>
             <Editor
                 x:Name="CarBudget"
                 Placeholder="Enter Car Budget"
-                Text="{Binding CarBudget}"
+                Text=""
                 HeightRequest="50"/>
 
             <Label Text="Entertainment Budget" FontSize="14"/>
             <Editor
                 x:Name="EntertainmentBudget"
                 Placeholder="Enter Entertainment Budget"
-                Text="{Binding EntertainmentBudget}"
+                Text=""
                 HeightRequest="50"/>
 
             <Label Text="Food Budget" FontSize="14"/>
             <Editor
                 x:Name="FoodBudget"
                 Placeholder="Enter Food Budget"
-                Text="{Binding FoodBudget}"
+                Text=""
                 HeightRequest="50"/>
 
             <Label Text="Miscellaneous Budget" FontSize="14"/>
             <Editor
                 x:Name="MiscBudget"
                 Placeholder="Enter Miscellaneous Budget"
-                Text="{Binding MiscBudget}"
+                Text=""
                 HeightRequest="50"/>
 
             <Label Text="Shopping Budget" FontSize="14"/>
             <Editor
                 x:Name="ShoppingBudget"
                 Placeholder="Enter Shopping Budget"
-                Text="{Binding ShoppingBudget}"
+                Text=""
                 HeightRequest="50"/>
 
             <Label Text="Rent Budget" FontSize="14"/>
             <Editor
                 x:Name="RentBudget"
                 Placeholder="Enter Rent Budget"
-                Text="{Binding RentBudget}"
+                Text=""
                 HeightRequest="50"/>
 
             <Grid Margin="0,0,0,10">
@@ -76,7 +77,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Text="Save" BackgroundColor="LightBlue" Clicked="OnSaveButton_Clicked"/>
-                <Button Text="Cancel" Grid.Column="1" BackgroundColor="LightCoral" TextColor="White" Clicked="OnDeleteButton_Clicked"/>
+                <Button Text="Delete" Grid.Column="1" BackgroundColor="LightCoral" TextColor="White" Clicked="OnDeleteButton_Clicked"/>
 
             </Grid>
         </StackLayout>

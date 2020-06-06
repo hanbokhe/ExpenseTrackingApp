@@ -17,6 +17,10 @@ namespace ExpenseTrackingApp.Model
 
         public double TotalBudget { get; set; }
 
+        public Budget()
+        {
+
+        }
         public double BudgetSpent
         {
             get
@@ -77,17 +81,12 @@ namespace ExpenseTrackingApp.Model
             this.BudgetLimit = budgetLimit;
         }
 
-        //public void Spent(double amount, DateTime date, string month, TransactionType type, string name)
-        //{
-        //    if (amount < 0)
-        //    {
-        //        throw new ArgumentOutOfRangeException(nameof(amount), "Enter a positive number");
-        //    }
-        //    var spent = new Transaction(amount, date, month, type, name);
-        //    allTransactions.Add(spent);
+        public Budget(string month)
+        {
+            this.Month = month;
+        }
 
-        //}
-
+     
 
         public List<Transaction> GetTransactions(ExpenseTrackingApp.Model.TransactionType transactionType)
         {

@@ -169,14 +169,11 @@ namespace ExpenseTrackingApp.Pages
             lblSpent.Text = $"Spent = ${budgetSpent}";
         }                                                    
 
-        //private async void BudgetItemsView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        //{
-        //    //await Navigation.PushModalAsync(new ListTransactionPage());
-        //}
-
         private async void EditButton_Clicked(object sender, EventArgs e)
         {
-           await Navigation.PushModalAsync(new AddBudget { BindingContext = new Budget(100) });
+            AddBudget x = new AddBudget { BindingContext = new Budget(MonthBudget) };
+            x.Init();
+            await Navigation.PushModalAsync(x); ;
         }
 
         private void MonthPicker_SelectedIndexChanged(object sender, EventArgs e)
