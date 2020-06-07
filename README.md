@@ -17,21 +17,24 @@ Expense tracking App is a simple Xamarin application that enables users to set t
 10. Used file system to store budget and transaction details by month.
 11. Data binding
 12. Behaviors
-KEY FEATURES:
+
+**KEY FEATURES:**
+
 1. Set budget by Category
 2. View overview of a budget by category
 3. Add expenses
 4. View overview of expenses and its details
 5.View expenses by category in detail, transaction date, and transaction amount.
 
-SUPPORTED PLATFORMS:
-
+**SUPPORTED PLATFORMS:**
 •	Android
-REQUIREMENTS TO RUN THE DEMO
-	
+
+**REQUIREMENTS TO RUN THE DEMO**
+
 •	Visual studio 2019	
 •	Xamarin add-ons for visual studio
 •	Android Emulator
 
-YOUTUBE LINK:
+**YOUTUBE LINK:**
+
 https://youtu.be/f0qstCA_qmc
