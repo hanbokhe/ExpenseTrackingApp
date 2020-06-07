@@ -1,8 +1,9 @@
 # ExpenseTrackingApp
 
-PROJECT TITLE: Expense Tracking App
+**PROJECT TITLE:** Expense Tracking App
 
-PROJECT DESCRIPTION:
+**PROJECT DESCRIPTION:**
+
 Expense tracking App is a simple Xamarin application that enables users to set the monthly Budget based on the pre-defined categories and also allows them to track their monthly expenses. This project uses the following patterns and Features: 
 1.  Xaml UI with tabbed navigation budget and Transaction Page
 2.  A model navigation page that provides controls to the users to set predefined categories budget and add monthly expenses against the set budget.
