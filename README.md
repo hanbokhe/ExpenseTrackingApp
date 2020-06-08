@@ -27,8 +27,8 @@ Expense tracking App is a simple Xamarin application that enables users to set t
 5.View expenses by category in detail, transaction date, and transaction amount.
 
 **SCREENSHOTS**
- https://github.com/adam-p/markdown-here/raw/master/src/common/images/BudgetPage.png
-  https://github.com/adam-p/markdown-here/raw/master/src/common/images/TransactionPage.png"
+https://github.com/hanbokhe/ExpenseTrackingApp/blob/master/ExpenseTrackingApp/ExpenseTrackingApp/Assets/Images/BudgetPage.PNG
+https://github.com/hanbokhe/ExpenseTrackingApp/blob/master/ExpenseTrackingApp/ExpenseTrackingApp/Assets/Images/Transactionpage.PNG
 
 **SUPPORTED PLATFORMS:**
 •	Android
