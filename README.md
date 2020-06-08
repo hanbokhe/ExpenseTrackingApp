@@ -38,8 +38,10 @@ Expense tracking App is a simple Xamarin application that enables users to set t
 
 **REQUIREMENTS TO RUN THE DEMO**
 
-•	Visual studio 2019	
+•	Visual studio 2019
+
 •	Xamarin add-ons for visual studio
+
 •	Android Emulator
 
 **YOUTUBE LINK:**
